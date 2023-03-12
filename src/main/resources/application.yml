@@ -1,0 +1,24 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: chaudharycattle
+  datasource:
+    url: jdbc:mysql://localhost:3306/chaudharycattle
+    username: root
+    password: rootroot
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: false
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  server:
+    port: 9090
+
+
+const:
+  ui.tittle = Chaudhary Cattle Farm
