@@ -3,6 +3,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -13,24 +14,16 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="920.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chaudhary.chaudharycattle.controllers.Farm.Milk">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chaudhary.chaudharycattle.controllers.Farm.Milk">
    <top>
-      <AnchorPane prefHeight="59.0" prefWidth="1620.0" style="-fx-background-color: #209FCB;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="65.0" prefWidth="1620.0" style="-fx-background-color: #209FCB;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="50.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="Milk" textFill="#209fcb">
+            <Button layoutX="50.0" layoutY="12.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="Milk" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="246.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadFoodUsage" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Usage" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="445.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadMadicine" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text="Madicine" textFill="WHITE">
+            <Button layoutX="246.0" layoutY="12.0" mnemonicParsing="false" onAction="#loadFoodUsage" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Usage" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -38,7 +31,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="653.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadFoodPurchase" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Purchase" textFill="WHITE">
+            <Button layoutX="445.0" layoutY="12.0" mnemonicParsing="false" onAction="#loadMadicine" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text="Madicine" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="653.0" layoutY="12.0" mnemonicParsing="false" onAction="#loadFoodPurchase" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Purchase" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -56,7 +57,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TableView fx:id="table" layoutX="1.0" layoutY="5.0" prefHeight="400.0" prefWidth="870.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px;">
+            <TableView fx:id="table" layoutX="1.0" layoutY="14.0" prefHeight="461.0" prefWidth="870.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-font-size: 18;">
               <columns>
                 <TableColumn fx:id="id" prefWidth="53.0" text="id" />
                 <TableColumn fx:id="shift" text="Shift" />
@@ -68,7 +69,7 @@
                   <TableColumn fx:id="action" prefWidth="107.0" text="Action" />
               </columns>
             </TableView>
-            <AnchorPane layoutY="411.0" prefHeight="450.0" prefWidth="1620.0" style="-fx-background-color: #209FCB;">
+            <AnchorPane layoutY="479.0" prefHeight="450.0" prefWidth="1620.0" style="-fx-background-color: #209FCB;">
                <children>
                   <Label layoutX="50.0" layoutY="98.0" text="Liter's" textFill="WHITE">
                      <font>
@@ -130,12 +131,13 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <ComboBox fx:id="cb" layoutX="885.0" layoutY="150.0" prefHeight="45.0" prefWidth="150.0" promptText="Select Shift" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" visibleRowCount="2">
+                  <ComboBox fx:id="cb" layoutX="885.0" layoutY="150.0" prefHeight="45.0" prefWidth="189.0" promptText="Select Shift" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-font-size: 20;" visibleRowCount="2">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ComboBox>
-                  <Button layoutX="1446.0" layoutY="27.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="125.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="   Save" textFill="#209fcb">
+                  <DatePicker fx:id="datePicker" layoutX="885.0" layoutY="320.0" prefHeight="39.0" prefWidth="189.0" style="-fx-background-color: #FFFFFF; -fx-font-size: 20;" />
+                  <Button fx:id="save" layoutX="1446.0" layoutY="27.0" mnemonicParsing="false" onAction="#submit" prefHeight="42.0" prefWidth="125.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="   Save" textFill="#209fcb">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -182,12 +184,12 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="morning" alignment="CENTER" layoutX="890.0" layoutY="89.0" prefHeight="45.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+            <TextField fx:id="morning" alignment="CENTER" editable="false" layoutX="890.0" layoutY="89.0" prefHeight="45.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
                <font>
                   <Font size="24.0" />
                </font>
             </TextField>
-            <TextField fx:id="evening" alignment="CENTER" layoutX="1321.0" layoutY="89.0" prefHeight="45.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-border-radius: 15;">
+            <TextField fx:id="evening" alignment="CENTER" editable="false" layoutX="1321.0" layoutY="89.0" prefHeight="45.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-border-radius: 15;">
                <font>
                   <Font size="24.0" />
                </font>
@@ -207,7 +209,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="fat" alignment="CENTER" layoutX="890.0" layoutY="205.0" prefHeight="45.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+            <TextField fx:id="fat" alignment="CENTER" editable="false" layoutX="890.0" layoutY="205.0" prefHeight="45.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
                <font>
                   <Font size="24.0" />
                </font>
@@ -217,7 +219,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="rate" alignment="CENTER" layoutX="1320.0" layoutY="205.0" prefHeight="45.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+            <TextField fx:id="rate" alignment="CENTER" editable="false" layoutX="1320.0" layoutY="205.0" prefHeight="45.0" prefWidth="226.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
                <font>
                   <Font size="24.0" />
                </font>
@@ -227,7 +229,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="amount" alignment="CENTER" layoutX="1057.0" layoutY="333.0" prefHeight="49.0" prefWidth="318.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+            <TextField fx:id="amount" alignment="CENTER" editable="false" layoutX="1057.0" layoutY="333.0" prefHeight="49.0" prefWidth="318.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
                <font>
                   <Font size="24.0" />
                </font>

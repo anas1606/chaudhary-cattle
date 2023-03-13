@@ -60,15 +60,25 @@ public class CommanUtils implements Serializable {
     @FXML
     public static void informationAlert(String heading, String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getDialogPane().setStyle("-fx-font-size: 18");
         alert.setTitle("Information");
         alert.setHeaderText(heading);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
+    @FXML
+    public static String confirmationAlert(String heading, String message){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.getDialogPane().setStyle("-fx-font-size: 20");
+        alert.setTitle("Confirmation");
+        alert.setHeaderText(heading);
+        alert.setContentText(message);
+        return alert.showAndWait().get().getText();
+    }
     @FXML
     public static void warningAlert(String heading, String message){
         Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.getDialogPane().setStyle("-fx-font-size: 18");
         alert.setTitle("Warning");
         alert.setHeaderText(heading);
         alert.setContentText(message);

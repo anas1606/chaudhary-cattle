@@ -8,13 +8,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.springframework.stereotype.Controller;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 @Controller
@@ -28,12 +26,34 @@ public class Milk implements Initializable {
     private ComboBox<String> cb;
     @FXML
     TableColumn<FarmMilkTableView, String> id,shift,date,liters,fats,rates,amounts,action;
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private Button save;
+
+    public void submit() {
+        float _lt = Float.parseFloat(parse(lt.getText())+"."+parse(ltd.getText()));
+        float _fat = Float.parseFloat(parse(ft.getText())+"."+parse(ftd.getText()));
+        float _rate = Float.parseFloat(parse(rt.getText())+"."+parse(rtd.getText()));
+        float _amount = Float.parseFloat(parse(at.getText())+"."+parse(atd.getText()));
+        if(validate(_lt,_fat,_rate,_amount)) {
+            StringBuilder str = new StringBuilder();
+            str.append("Date : ").append(datePicker.getValue());
+            str.append("\nShift : ").append(cb.getValue());
+            str.append("\nLt : ").append(_lt);
+            str.append("\nFat : ").append(_fat);
+            str.append("\nRate : ").append(_rate);
+            str.append("\nAmount : ").append(_amount);
+            System.out.println(CommanUtils.confirmationAlert("Dairy Slip ", str.toString()));
+        }else {
+            CommanUtils.warningAlert("Warning", "Please Fill All The Fields");
+            lt.requestFocus();
+        }
+    }
     public void loadFoodUsage(){
-        new CommanUtils();
         CommanUtils.loadPage(FxmlPaths.FARM_FOOD_USAGE);
     }
     public void loadMadicine(){
-        new CommanUtils();
         CommanUtils.loadPage(FxmlPaths.FARM_MADICINE);
     }
     public void loadFoodPurchase(){
@@ -89,6 +109,15 @@ public class Milk implements Initializable {
                 new FarmMilkTableView("1","Morning","10.03.2023","1200","6.4","50.65","14987.45","Action")
         );
         table.setItems(data);
+        datePicker.setValue(LocalDate.now());
         Platform.runLater(()-> lt.requestFocus());
+    }
+
+    private boolean validate(float lt, float fat, float rate, float amount) {
+        return lt > 0.0 && fat > 0.0 && rate > 0.0 && amount > 0.0 && cb.getValue() != null && datePicker.getValue() != null;
+    }
+
+    private int parse (String str){
+        return (str.equals(""))?0:Integer.parseInt(str);
     }
 }

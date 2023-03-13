@@ -35,8 +35,7 @@ public class Login implements Initializable {
     }
     public void signIn (){
         if(loginService.login(username.getText(), password.getText())){
-            CommanUtils.informationAlert("Login Success.","");
-            CommanUtils.switchToScene(FxmlPaths.LANDING, signin,1900, 850);
+            CommanUtils.switchToScene(FxmlPaths.LANDING, signin,1900, 1000);
         }else {
             CommanUtils.warningAlert("Invalid UserName or Password.","");
             username.clear();
