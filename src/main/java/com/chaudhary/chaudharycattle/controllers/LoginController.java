@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Controller
-public class Login implements Initializable {
+public class LoginController implements Initializable {
 
     @FXML
     private TextField username;
@@ -46,6 +46,6 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        loginService.init();
     }
 }

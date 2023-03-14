@@ -5,7 +5,7 @@ import com.chaudhary.chaudharycattle.utils.FxmlPaths;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class FoodUsage {
+public class FoodUsageController {
 
     public void loadMilk(){
         new CommanUtils().loadPage(FxmlPaths.FARM_MILK);

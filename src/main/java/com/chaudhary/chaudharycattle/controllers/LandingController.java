@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 @Controller
-public class Landing implements Initializable {
+public class LandingController implements Initializable {
 
     @FXML
     private BorderPane bp;

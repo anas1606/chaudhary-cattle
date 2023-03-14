@@ -1,6 +1,7 @@
 package com.chaudhary.chaudharycattle.controllers.Farm;
 
 import com.chaudhary.chaudharycattle.model.FarmMilkTableView;
+import com.chaudhary.chaudharycattle.service.farm.MilkService;
 import com.chaudhary.chaudharycattle.utils.CommanUtils;
 import com.chaudhary.chaudharycattle.utils.FxmlPaths;
 import javafx.application.Platform;
@@ -10,13 +11,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 @Controller
-public class Milk implements Initializable {
+public class MilkController implements Initializable {
 
     @FXML
     private TextField lt, ltd, ft, ftd, rt, rtd, at, atd, morning, evening, fat, rate, amount;
@@ -31,11 +33,14 @@ public class Milk implements Initializable {
     @FXML
     private Button save;
 
+    @Autowired
+    private MilkService milkService;
+
     public void submit() {
-        float _lt = Float.parseFloat(parse(lt.getText())+"."+parse(ltd.getText()));
-        float _fat = Float.parseFloat(parse(ft.getText())+"."+parse(ftd.getText()));
-        float _rate = Float.parseFloat(parse(rt.getText())+"."+parse(rtd.getText()));
-        float _amount = Float.parseFloat(parse(at.getText())+"."+parse(atd.getText()));
+        double _lt = Double.parseDouble(parse(lt.getText())+"."+parse(ltd.getText()));
+        double _fat = Double.parseDouble(parse(ft.getText())+"."+parse(ftd.getText()));
+        double _rate = Double.parseDouble(parse(rt.getText())+"."+parse(rtd.getText()));
+        double _amount = Double.parseDouble(parse(at.getText())+"."+parse(atd.getText()));
         if(validate(_lt,_fat,_rate,_amount)) {
             StringBuilder str = new StringBuilder();
             str.append("Date : ").append(datePicker.getValue());
@@ -44,7 +49,11 @@ public class Milk implements Initializable {
             str.append("\nFat : ").append(_fat);
             str.append("\nRate : ").append(_rate);
             str.append("\nAmount : ").append(_amount);
-            System.out.println(CommanUtils.confirmationAlert("Dairy Slip ", str.toString()));
+
+            if( (CommanUtils.confirmationAlert("Dairy Slip ", str.toString())).equalsIgnoreCase("OK") ) {
+                milkService.saveData(cb.getValue(), datePicker.getValue(), _lt, _fat, _rate, _amount);
+                CommanUtils.informationAlert("Information", "Dairy Slip Saved.");
+            }
         }else {
             CommanUtils.warningAlert("Warning", "Please Fill All The Fields");
             lt.requestFocus();
@@ -113,7 +122,7 @@ public class Milk implements Initializable {
         Platform.runLater(()-> lt.requestFocus());
     }
 
-    private boolean validate(float lt, float fat, float rate, float amount) {
+    private boolean validate(Double lt, Double fat, Double rate, Double amount) {
         return lt > 0.0 && fat > 0.0 && rate > 0.0 && amount > 0.0 && cb.getValue() != null && datePicker.getValue() != null;
     }
 

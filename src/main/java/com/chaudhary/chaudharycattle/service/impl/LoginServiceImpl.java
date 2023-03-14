@@ -16,9 +16,14 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public boolean login(String userName, String password) {
         User user = userRepository.findByUsername(userName);
-        if(user != null && CommanUtils.checkPassword(password,user.getPassword())) {
-            return true;
+        return user != null && CommanUtils.checkPassword(password, user.getPassword());
+    }
+
+    @Override
+    public void init() {
+        User user = userRepository.findByUsername("Admin");
+        if(user == null) {
+            userRepository.save(new User("Admin",CommanUtils.hashPassword("Admin@1122")));
         }
-        return false;
     }
 }

@@ -18,9 +18,7 @@ public class CommanUtils implements Serializable {
     public static BorderPane landing_bp;
     public static String hashPassword(String password_plaintext) {
         String salt = BCrypt.gensalt(12);
-        String hashed_password = BCrypt.hashpw(password_plaintext, salt);
-
-        return(hashed_password);
+        return(BCrypt.hashpw(password_plaintext, salt));
     }
 
     public static boolean checkPassword(String password_plaintext, String stored_hash) {

@@ -5,16 +5,15 @@ import com.chaudhary.chaudharycattle.utils.FxmlPaths;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class Madicine {
+public class FoodPurchaseController {
 
     public void loadMilk(){
-        new CommanUtils().loadPage(FxmlPaths.FARM_MILK);
+        CommanUtils.loadPage(FxmlPaths.FARM_MILK);
     }
     public void loadFoodUsage(){
-        new CommanUtils().loadPage(FxmlPaths.FARM_FOOD_USAGE);
+        CommanUtils.loadPage(FxmlPaths.FARM_FOOD_USAGE);
     }
-    public void loadFoodPurchase(){
-        new CommanUtils().loadPage(FxmlPaths.FARM_FOOD_PURCHASE);
+    public void loadMadicine(){
+        CommanUtils.loadPage(FxmlPaths.FARM_MADICINE);
     }
-
 }
