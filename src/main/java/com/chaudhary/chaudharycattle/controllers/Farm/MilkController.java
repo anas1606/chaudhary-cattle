@@ -1,6 +1,8 @@
 package com.chaudhary.chaudharycattle.controllers.Farm;
 
-import com.chaudhary.chaudharycattle.model.FarmMilkTableView;
+import com.chaudhary.chaudharycattle.entities.enums.Shift;
+import com.chaudhary.chaudharycattle.model.farm.MilkRecordModel;
+import com.chaudhary.chaudharycattle.model.farm.MilkTableView;
 import com.chaudhary.chaudharycattle.service.farm.MilkService;
 import com.chaudhary.chaudharycattle.utils.CommanUtils;
 import com.chaudhary.chaudharycattle.utils.FxmlPaths;
@@ -23,11 +25,11 @@ public class MilkController implements Initializable {
     @FXML
     private TextField lt, ltd, ft, ftd, rt, rtd, at, atd, morning, evening, fat, rate, amount;
     @FXML
-    TableView<FarmMilkTableView> table = new TableView<>();
+    TableView<MilkTableView> table = new TableView<>();
     @FXML
     private ComboBox<String> cb;
     @FXML
-    TableColumn<FarmMilkTableView, String> id,shift,date,liters,fats,rates,amounts,action;
+    TableColumn<MilkTableView, String> id,shift,date,liters,fats,rates,amounts;
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -99,11 +101,12 @@ public class MilkController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<String> options = FXCollections.observableArrayList("MORNING","EVENING");
         cb.setItems(options);
-        morning.setText("189.45");
-        evening.setText("179.89");
-        fat.setText("6.3");
-        rate.setText("50.45");
-        amount.setText("14987.56");
+        morning.setText(milkService.totalLitersOfMilkByShift(Shift.MORNING).toString());
+        evening.setText(milkService.totalLitersOfMilkByShift(Shift.EVENING).toString());
+        MilkRecordModel model = milkService.milkRecord();
+        fat.setText(model.getFat().toString());
+        rate.setText(model.getRate().toString());
+        amount.setText(model.getAmount().toString());
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         shift.setCellValueFactory(new PropertyValueFactory<>("shift"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -112,10 +115,8 @@ public class MilkController implements Initializable {
         rates.setCellValueFactory(new PropertyValueFactory<>("rate"));
         amounts.setCellValueFactory(new PropertyValueFactory<>("amount"));
         //Creating a table view
-        final ObservableList<FarmMilkTableView> data = FXCollections.observableArrayList(
-                new FarmMilkTableView("1","Morning","10.03.2023","1200","6.4","50.65","14987.45","Action"),
-                new FarmMilkTableView("1","Morning","10.03.2023","1200","6.4","50.65","14987.45","Action"),
-                new FarmMilkTableView("1","Morning","10.03.2023","1200","6.4","50.65","14987.45","Action")
+        final ObservableList<MilkTableView> data = FXCollections.observableArrayList(
+                milkService.getTableData()
         );
         table.setItems(data);
         datePicker.setValue(LocalDate.now());
