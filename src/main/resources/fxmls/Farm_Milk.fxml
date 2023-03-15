@@ -57,9 +57,8 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <TableView fx:id="table" layoutX="1.0" layoutY="14.0" prefHeight="461.0" prefWidth="870.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-font-size: 18;">
+            <TableView fx:id="table" layoutX="1.0" layoutY="14.0" prefHeight="422.0" prefWidth="870.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-font-size: 20;">
               <columns>
-                <TableColumn fx:id="id" prefWidth="53.0" text="id" />
                 <TableColumn fx:id="shift" text="Shift" />
                   <TableColumn fx:id="date" prefWidth="153.0" text="Date" />
                   <TableColumn fx:id="liters" prefWidth="117.0" text="Liters" />
@@ -139,7 +138,7 @@
                      </cursor>
                   </ComboBox>
                   <DatePicker fx:id="datePicker" layoutX="885.0" layoutY="320.0" prefHeight="39.0" prefWidth="189.0" style="-fx-background-color: #FFFFFF; -fx-font-size: 20;" />
-                  <Button fx:id="save" layoutX="1446.0" layoutY="27.0" mnemonicParsing="false" onAction="#submit" prefHeight="42.0" prefWidth="125.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="   Save" textFill="#209fcb">
+                  <Button layoutX="1446.0" layoutY="27.0" mnemonicParsing="false" onAction="#submit" prefHeight="42.0" prefWidth="125.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="   Save" textFill="#209fcb">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -244,6 +243,21 @@
             <Label layoutX="1554.0" layoutY="230.0" text="Rs" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="843.0" layoutY="443.0" mnemonicParsing="false" onAction="#nextPage" style="-fx-background-color: #209FCB;" text="&gt;" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button layoutX="803.0" layoutY="443.0" mnemonicParsing="false" onAction="#prevPage" style="-fx-background-color: #209FCB;" text="&lt;" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="pagination" layoutX="407.0" layoutY="447.0" text="1 - 10 / 0" textFill="#209fcb">
+               <font>
+                  <Font size="16.0" />
                </font>
             </Label>
          </children></AnchorPane>

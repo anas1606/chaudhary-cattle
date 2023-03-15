@@ -29,14 +29,18 @@ public class MilkController implements Initializable {
     @FXML
     private ComboBox<String> cb;
     @FXML
-    TableColumn<MilkTableView, String> id,shift,date,liters,fats,rates,amounts;
+    TableColumn<MilkTableView, String> shift,date,liters,fats,rates,amounts;
     @FXML
     private DatePicker datePicker;
     @FXML
-    private Button save;
-
+    private Label pagination;
     @Autowired
     private MilkService milkService;
+    private static int pageNo = 0;
+    private static final int maxSize = 10;
+    private static int from = 1;
+    private static int to = maxSize;
+    private static int totalRecord = 0;
 
     public void submit() {
         double _lt = Double.parseDouble(parse(lt.getText())+"."+parse(ltd.getText()));
@@ -68,7 +72,6 @@ public class MilkController implements Initializable {
         CommanUtils.loadPage(FxmlPaths.FARM_MADICINE);
     }
     public void loadFoodPurchase(){
-        new CommanUtils();
         CommanUtils.loadPage(FxmlPaths.FARM_FOOD_PURCHASE);
     }
 
@@ -99,6 +102,7 @@ public class MilkController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         ObservableList<String> options = FXCollections.observableArrayList("MORNING","EVENING");
         cb.setItems(options);
         morning.setText(milkService.totalLitersOfMilkByShift(Shift.MORNING).toString());
@@ -107,7 +111,33 @@ public class MilkController implements Initializable {
         fat.setText(model.getFat().toString());
         rate.setText(model.getRate().toString());
         amount.setText(model.getAmount().toString());
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        datePicker.setValue(LocalDate.now());
+        Platform.runLater(()-> lt.requestFocus());
+
+        Thread tableThread = new Thread(this::renderDataTable);
+        tableThread.start();
+    }
+
+    public void nextPage (){
+        if(totalRecord > (pageNo+1)*maxSize) {
+            pageNo++;
+            from = to + 1;
+            to = to + maxSize;
+            renderDataTable();
+        }
+    }
+    public void prevPage (){
+        if(pageNo > 0) {
+            pageNo--;
+            from = from - maxSize;
+            to = to - maxSize;
+            renderDataTable();
+        }
+    }
+    private boolean validate(Double lt, Double fat, Double rate, Double amount) {
+        return lt > 0.0 && fat > 0.0 && rate > 0.0 && amount > 0.0 && cb.getValue() != null && datePicker.getValue() != null;
+    }
+    private void renderDataTable (){
         shift.setCellValueFactory(new PropertyValueFactory<>("shift"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
         liters.setCellValueFactory(new PropertyValueFactory<>("liters"));
@@ -116,17 +146,12 @@ public class MilkController implements Initializable {
         amounts.setCellValueFactory(new PropertyValueFactory<>("amount"));
         //Creating a table view
         final ObservableList<MilkTableView> data = FXCollections.observableArrayList(
-                milkService.getTableData()
+                milkService.getTableData(pageNo, maxSize)
         );
+        totalRecord = milkService.getTableDataCount();
         table.setItems(data);
-        datePicker.setValue(LocalDate.now());
-        Platform.runLater(()-> lt.requestFocus());
+        pagination.setText(""+(from)+" - "+(Math.min(to,totalRecord))+" / "+totalRecord);
     }
-
-    private boolean validate(Double lt, Double fat, Double rate, Double amount) {
-        return lt > 0.0 && fat > 0.0 && rate > 0.0 && amount > 0.0 && cb.getValue() != null && datePicker.getValue() != null;
-    }
-
     private int parse (String str){
         return (str.equals(""))?0:Integer.parseInt(str);
     }
