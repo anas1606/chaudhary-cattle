@@ -25,11 +25,11 @@ public class MilkController implements Initializable {
     @FXML
     private TextField lt, ltd, ft, ftd, rt, rtd, at, atd, morning, evening, fat, rate, amount;
     @FXML
-    TableView<MilkTableView> table = new TableView<>();
+    private TableView<MilkTableView> table = new TableView<>();
     @FXML
     private ComboBox<String> cb;
     @FXML
-    TableColumn<MilkTableView, String> shift,date,liters,fats,rates,amounts;
+    private TableColumn<MilkTableView, String> shift,date,liters,fats,rates,amounts;
     @FXML
     private DatePicker datePicker;
     @FXML
@@ -59,6 +59,7 @@ public class MilkController implements Initializable {
             if( (CommanUtils.confirmationAlert("Dairy Slip ", str.toString())).equalsIgnoreCase("OK") ) {
                 milkService.saveData(cb.getValue(), datePicker.getValue(), _lt, _fat, _rate, _amount);
                 CommanUtils.informationAlert("Information", "Dairy Slip Saved.");
+                renderDataTable();
             }
         }else {
             CommanUtils.warningAlert("Warning", "Please Fill All The Fields");
@@ -105,17 +106,11 @@ public class MilkController implements Initializable {
 
         ObservableList<String> options = FXCollections.observableArrayList("MORNING","EVENING");
         cb.setItems(options);
-        morning.setText(milkService.totalLitersOfMilkByShift(Shift.MORNING).toString());
-        evening.setText(milkService.totalLitersOfMilkByShift(Shift.EVENING).toString());
-        MilkRecordModel model = milkService.milkRecord();
-        fat.setText(model.getFat().toString());
-        rate.setText(model.getRate().toString());
-        amount.setText(model.getAmount().toString());
         datePicker.setValue(LocalDate.now());
         Platform.runLater(()-> lt.requestFocus());
 
-        Thread tableThread = new Thread(this::renderDataTable);
-        tableThread.start();
+        Thread totalData = new Thread(this::RenderTotalData);
+        totalData.start();
     }
 
     public void nextPage (){
@@ -136,6 +131,18 @@ public class MilkController implements Initializable {
     }
     private boolean validate(Double lt, Double fat, Double rate, Double amount) {
         return lt > 0.0 && fat > 0.0 && rate > 0.0 && amount > 0.0 && cb.getValue() != null && datePicker.getValue() != null;
+    }
+    private  void RenderTotalData (){
+
+        Thread tableThread = new Thread(this::renderDataTable);
+        tableThread.start();
+
+        morning.setText(milkService.totalLitersOfMilkByShift(Shift.MORNING).toString());
+        evening.setText(milkService.totalLitersOfMilkByShift(Shift.EVENING).toString());
+        MilkRecordModel model = milkService.milkRecord();
+        fat.setText(model.getFat().toString());
+        rate.setText(model.getRate().toString());
+        amount.setText(model.getAmount().toString());
     }
     private void renderDataTable (){
         shift.setCellValueFactory(new PropertyValueFactory<>("shift"));

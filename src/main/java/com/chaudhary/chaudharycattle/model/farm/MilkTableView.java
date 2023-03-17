@@ -18,7 +18,6 @@ public class MilkTableView {
     private Double fat;
     private Double rate;
     private Double amount;
-    private Double action;
 
     public MilkTableView (Milk milk){
         this.id = milk.getId();

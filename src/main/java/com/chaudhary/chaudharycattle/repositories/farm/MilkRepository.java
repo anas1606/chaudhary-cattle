@@ -1,6 +1,5 @@
 package com.chaudhary.chaudharycattle.repositories.farm;
 
-import com.chaudhary.chaudharycattle.entities.enums.Shift;
 import com.chaudhary.chaudharycattle.entities.farm.Milk;
 import com.chaudhary.chaudharycattle.model.farm.MilkRecordModel;
 import org.springframework.data.domain.Page;
