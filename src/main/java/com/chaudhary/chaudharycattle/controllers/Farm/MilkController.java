@@ -59,7 +59,7 @@ public class MilkController implements Initializable {
             if( (CommanUtils.confirmationAlert("Dairy Slip ", str.toString())).equalsIgnoreCase("OK") ) {
                 milkService.saveData(cb.getValue(), datePicker.getValue(), _lt, _fat, _rate, _amount);
                 CommanUtils.informationAlert("Information", "Dairy Slip Saved.");
-                renderDataTable();
+                renderTotalData();
             }
         }else {
             CommanUtils.warningAlert("Warning", "Please Fill All The Fields");
@@ -109,7 +109,7 @@ public class MilkController implements Initializable {
         datePicker.setValue(LocalDate.now());
         Platform.runLater(()-> lt.requestFocus());
 
-        Thread totalData = new Thread(this::RenderTotalData);
+        Thread totalData = new Thread(this::renderTotalData);
         totalData.start();
     }
 
@@ -132,7 +132,7 @@ public class MilkController implements Initializable {
     private boolean validate(Double lt, Double fat, Double rate, Double amount) {
         return lt > 0.0 && fat > 0.0 && rate > 0.0 && amount > 0.0 && cb.getValue() != null && datePicker.getValue() != null;
     }
-    private  void RenderTotalData (){
+    private  void renderTotalData (){
 
         Thread tableThread = new Thread(this::renderDataTable);
         tableThread.start();

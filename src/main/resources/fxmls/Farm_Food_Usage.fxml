@@ -129,6 +129,46 @@
             </Label>
             <Button layoutX="821.0" layoutY="436.0" mnemonicParsing="false" onAction="#prevPage" style="-fx-background-color: #209FCB;" text="&lt;" textFill="WHITE" />
             <Button layoutX="859.0" layoutY="436.0" mnemonicParsing="false" onAction="#nextPage" style="-fx-background-color: #209FCB;" text="&gt;" textFill="WHITE" />
+            <Label layoutX="1045.0" layoutY="78.0" text="CHHAR" textFill="#209fcb">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="1312.0" layoutY="78.0" text="TAIL" textFill="#209fcb">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="1052.0" layoutY="258.0" text="GOOL" textFill="#209fcb">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="1307.0" layoutY="258.0" text="BEAR" textFill="#209fcb">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="chhar" alignment="CENTER" editable="false" layoutX="984.0" layoutY="146.0" prefHeight="45.0" prefWidth="203.0" promptText="0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="tail" alignment="CENTER" editable="false" layoutX="1234.0" layoutY="146.0" prefHeight="45.0" prefWidth="203.0" promptText="0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="gool" alignment="CENTER" editable="false" layoutX="984.0" layoutY="316.0" prefHeight="45.0" prefWidth="203.0" promptText="0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="bear" alignment="CENTER" editable="false" layoutX="1234.0" layoutY="316.0" prefHeight="45.0" prefWidth="203.0" promptText="0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </TextField>
          </children></AnchorPane>
     </center>
 </BorderPane>

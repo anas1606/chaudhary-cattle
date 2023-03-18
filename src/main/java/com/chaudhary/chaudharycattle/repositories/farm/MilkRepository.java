@@ -18,5 +18,5 @@ public interface MilkRepository extends JpaRepository<Milk, Long> {
     Double sumOfLitersByCreatedDateBetweenAndShift (LocalDate startDate, LocalDate endDate, String shift);
 
     @Query("SELECT new com.chaudhary.chaudharycattle.model.farm.MilkRecordModel( ROUND(AVG(fat),2), ROUND(AVG(rate),2), ROUND(SUM(amount),2) ) FROM Milk WHERE createdDate BETWEEN ?1 AND ?2")
-    MilkRecordModel MilkRecord (LocalDate startDate, LocalDate endDate);
+    MilkRecordModel milkRecord (LocalDate startDate, LocalDate endDate);
 }

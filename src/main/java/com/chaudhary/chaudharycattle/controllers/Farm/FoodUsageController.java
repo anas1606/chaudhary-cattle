@@ -1,6 +1,7 @@
 package com.chaudhary.chaudharycattle.controllers.Farm;
 
 import com.chaudhary.chaudharycattle.entities.farm.Food;
+import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordModel;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageTableView;
 import com.chaudhary.chaudharycattle.service.farm.FoodUsageService;
 import com.chaudhary.chaudharycattle.utils.CommanUtils;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 public class FoodUsageController implements Initializable {
 
     @FXML
-    private TextField food,qty,qtyd;
+    private TextField food,qty,qtyd,chhar,gool,tail,bear;
     @FXML
     private TableView<FoodUsageTableView> table = new TableView<>();
     @FXML
@@ -58,8 +59,8 @@ public class FoodUsageController implements Initializable {
         datePicker.setValue(LocalDate.now());
         Platform.runLater(()-> food.requestFocus());
 
-        Thread tableThread = new Thread(this::renderDataTable);
-        tableThread.start();
+        Thread rederTotalData = new Thread(this::renderTotalData);
+        rederTotalData.start();
     }
     public void submit (){
         double qty = Double.parseDouble(parse(this.qty.getText()) + "." + parse(this.qtyd.getText()));
@@ -71,7 +72,7 @@ public class FoodUsageController implements Initializable {
             if((CommanUtils.confirmationAlert("Food Usage Slip ", str.toString())).equalsIgnoreCase("OK") ) {
                 foodUsageService.submit(food.getText(), qty);
                 CommanUtils.informationAlert("Information", "Stock Updated & Data Inserted");
-                renderDataTable();
+                renderTotalData();
             }
         }else {
             CommanUtils.warningAlert("Warning", "Please Fill All The Fields");
@@ -82,18 +83,6 @@ public class FoodUsageController implements Initializable {
     }
     public void isNumberd(){
         CommanUtils.numberFormate(qtyd);
-    }
-    private void renderDataTable (){
-        foodCol.setCellValueFactory(new PropertyValueFactory<>("food"));
-        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-        qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
-        //Creating a table view
-        final ObservableList<FoodUsageTableView> data = FXCollections.observableArrayList(
-                foodUsageService.getDataTable(pageNo, maxSize)
-        );
-        totalRecord = foodUsageService.getTableDataCount();
-        table.setItems(data);
-        pagination.setText(""+(from)+" - "+(Math.min(to,totalRecord))+" / "+totalRecord);
     }
     public void nextPage (){
         if(totalRecord > (pageNo+1)*maxSize) {
@@ -110,6 +99,29 @@ public class FoodUsageController implements Initializable {
             to = to - maxSize;
             renderDataTable();
         }
+    }
+    private  void renderTotalData (){
+        Thread tableThread = new Thread(this::renderDataTable);
+        tableThread.start();
+
+        FoodUsageRecordModel model = foodUsageService.foodUsageRecord();
+        System.out.println("==="+model.toString());
+        chhar.setText(model.getChhar().toString());
+        gool.setText(model.getGool().toString());
+        tail.setText(model.getTail().toString());
+        bear.setText(model.getBear().toString());
+    }
+    private void renderDataTable (){
+        foodCol.setCellValueFactory(new PropertyValueFactory<>("food"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        //Creating a table view
+        final ObservableList<FoodUsageTableView> data = FXCollections.observableArrayList(
+                foodUsageService.getDataTable(pageNo, maxSize)
+        );
+        totalRecord = foodUsageService.getTableDataCount();
+        table.setItems(data);
+        pagination.setText(""+(from)+" - "+(Math.min(to,totalRecord))+" / "+totalRecord);
     }
     private boolean validate(Double qty) {
         return foodList.contains(food.getText()) && qty > 0.0;

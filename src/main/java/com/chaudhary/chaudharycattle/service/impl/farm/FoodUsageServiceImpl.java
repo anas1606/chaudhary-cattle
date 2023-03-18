@@ -2,6 +2,7 @@ package com.chaudhary.chaudharycattle.service.impl.farm;
 
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.entities.farm.FoodUsage;
+import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordModel;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageTableView;
 import com.chaudhary.chaudharycattle.repositories.farm.FoodRepository;
 import com.chaudhary.chaudharycattle.repositories.farm.FoodUsageRepository;
@@ -59,5 +60,21 @@ public class FoodUsageServiceImpl implements FoodUsageService {
         LocalDate sdate = LocalDate.now();
         Integer count =  foodUsageRepository.countOfIdByCreatedDateBetween(sdate.minusDays(50), sdate.plusMonths(1));
         return count != null ? count : 0;
+    }
+
+    @Override
+    public FoodUsageRecordModel foodUsageRecord() {
+        LocalDate sdate = LocalDate.now().minusDays(50);
+        LocalDate edate = LocalDate.now().plusMonths(1);
+        FoodUsageRecordModel model = new FoodUsageRecordModel();
+        Double tail = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate,edate,foodRepository.findByName("TAIL").getId());
+        Double gool = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate,edate,foodRepository.findByName("GOOL").getId());
+        Double chhar = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate,edate,foodRepository.findByName("CHHAR").getId());
+        Double bear = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id (sdate,edate,foodRepository.findByName("BEAR").getId());
+        model.setTail(tail != null ? tail : 0.0);
+        model.setGool(gool != null ? gool : 0.0);
+        model.setChhar(chhar != null ? chhar : 0.0);
+        model.setBear(bear != null ? bear : 0.0);
+        return model;
     }
 }

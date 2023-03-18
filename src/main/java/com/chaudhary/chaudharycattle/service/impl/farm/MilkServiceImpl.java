@@ -51,6 +51,6 @@ public class MilkServiceImpl implements MilkService {
 
     @Override
     public MilkRecordModel milkRecord() {
-        return milkRepository.MilkRecord(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1));
+        return milkRepository.milkRecord(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1));
     }
 }
