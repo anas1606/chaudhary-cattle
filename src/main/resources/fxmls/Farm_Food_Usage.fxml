@@ -68,7 +68,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="food" alignment="CENTER" layoutX="50.0" layoutY="170.0" prefHeight="45.0" prefWidth="305.0" promptText="Chhar/Gool/Tail/Bear" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="food" alignment="CENTER" layoutX="50.0" layoutY="170.0" prefHeight="45.0" prefWidth="305.0" promptText="FOOD NAME" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -127,8 +127,8 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Button layoutX="821.0" layoutY="436.0" mnemonicParsing="false" onAction="#prevPage" style="-fx-background-color: #209FCB;" text="&lt;" textFill="WHITE" />
-            <Button layoutX="859.0" layoutY="436.0" mnemonicParsing="false" onAction="#nextPage" style="-fx-background-color: #209FCB;" text="&gt;" textFill="WHITE" />
+            <Button layoutX="819.0" layoutY="436.0" mnemonicParsing="false" onAction="#prevPage" style="-fx-background-color: #209FCB;" text="&lt;" textFill="WHITE" />
+            <Button layoutX="854.0" layoutY="436.0" mnemonicParsing="false" onAction="#nextPage" style="-fx-background-color: #209FCB;" text="&gt;" textFill="WHITE" />
             <Label layoutX="1045.0" layoutY="78.0" text="CHHAR" textFill="#209fcb">
                <font>
                   <Font size="24.0" />
