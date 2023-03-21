@@ -32,20 +32,34 @@ public class FoodUsageServiceImpl implements FoodUsageService {
         return foodRepository.findAll();
     }
 
+    @Override
+    public String getFoodUnit(String name) {
+        String unit = foodRepository.findUnitByName(name);
+        if(unit != null)
+            return unit;
+        else
+            return "";
+    }
+
     @Transactional
     @Override
-    public void submit(String name, Double qty) {
+    public boolean submit(String name, Double qty) {
         Food food = foodRepository.findByName(name);
         if(food!=null){
             try {
-                food.setStock(food.getStock() - qty);
-                foodRepository.save(food);
-                FoodUsage foodUsage = new FoodUsage(food, LocalDate.now(), qty);
-                foodUsageRepository.save(foodUsage);
+                if(foodRepository.findQtyByName(name) >= qty) {
+                    food.setStock(food.getStock() - qty);
+                    foodRepository.save(food);
+                    FoodUsage foodUsage = new FoodUsage(food, LocalDate.now(), qty);
+                    foodUsageRepository.save(foodUsage);
+                    return true;
+                }else
+                    return false;
             }catch (Exception e){
                 CommanUtils.warningAlert("Warning", "Something Wrong.\nPlease Try Again");
             }
         }
+        return false;
     }
 
     @Override

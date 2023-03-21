@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class FoodUsageController implements Initializable {
 
     @FXML
-    private TextField food,qty,qtyd,chhar,gool,tail,bear;
+    private TextField food,qty,unit,qtyd,chhar,gool,tail,bear;
     @FXML
     private TableView<FoodUsageTableView> table = new TableView<>();
     @FXML
@@ -59,6 +59,22 @@ public class FoodUsageController implements Initializable {
         datePicker.setValue(LocalDate.now());
         Platform.runLater(()-> food.requestFocus());
 
+        unit.focusedProperty().addListener((ov, oldv, newV) -> {
+            String unit = foodUsageService.getFoodUnit(food.getText());
+            if(unit.equalsIgnoreCase("")){
+                this.unit.clear();
+                qty.clear();
+                qtyd.clear();
+                food.clear();
+                food.requestFocus();
+            }else{
+                this.unit.setText(unit);
+                qty.clear();
+                qtyd.clear();
+                qty.requestFocus();
+            }
+        });
+
         Thread rederTotalData = new Thread(this::renderTotalData);
         rederTotalData.start();
     }
@@ -70,9 +86,17 @@ public class FoodUsageController implements Initializable {
             str.append("\nUnit : ").append("KG");
             str.append("\nQty : ").append(qty);
             if((CommanUtils.confirmationAlert("Food Usage Slip ", str.toString())).equalsIgnoreCase("OK") ) {
-                foodUsageService.submit(food.getText(), qty);
-                CommanUtils.informationAlert("Information", "Stock Updated & Data Inserted");
-                renderTotalData();
+                if(foodUsageService.submit(food.getText(), qty)) {
+                    CommanUtils.informationAlert("Information", "Stock Updated & Data Inserted");
+                    renderTotalData();
+                    food.clear();
+                    food.requestFocus();
+                    unit.clear();
+                    this.qty.clear();
+                    qtyd.clear();
+                }else {
+                    CommanUtils.warningAlert("Warning", "Insufficient Stock");
+                }
             }
         }else {
             CommanUtils.warningAlert("Warning", "Please Fill All The Fields");
@@ -101,11 +125,8 @@ public class FoodUsageController implements Initializable {
         }
     }
     private  void renderTotalData (){
-        Thread tableThread = new Thread(this::renderDataTable);
-        tableThread.start();
-
+        renderDataTable();
         FoodUsageRecordModel model = foodUsageService.foodUsageRecord();
-        System.out.println("==="+model.toString());
         chhar.setText(model.getChhar().toString());
         gool.setText(model.getGool().toString());
         tail.setText(model.getTail().toString());
