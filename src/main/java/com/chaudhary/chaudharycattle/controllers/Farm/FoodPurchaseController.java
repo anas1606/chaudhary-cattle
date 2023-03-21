@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
