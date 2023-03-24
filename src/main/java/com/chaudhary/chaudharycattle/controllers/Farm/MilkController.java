@@ -13,17 +13,23 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @Controller
 public class MilkController implements Initializable {
 
     @FXML
-    private TextField lt, ltd, ft, ftd, rt, rtd, at, atd, morning, evening, fat, rate, amount;
+    private TextField lt, ltd, ft, ftd, rt, rtd, at, atd, morning, evening, fat, rate, amount,code;
     @FXML
     private TableView<MilkTableView> table = new TableView<>();
     @FXML
@@ -33,7 +39,7 @@ public class MilkController implements Initializable {
     @FXML
     private DatePicker datePicker;
     @FXML
-    private Label pagination;
+    private Label pagination,recordLabel;
     @Autowired
     private MilkService milkService;
     private static int pageNo = 0;
@@ -41,7 +47,11 @@ public class MilkController implements Initializable {
     private static int from = 1;
     private static int to = maxSize;
     private static int totalRecord = 0;
-
+    private static List<String> codes = new ArrayList<>(Arrays.asList("0599","0868"));
+    public void submit_key(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER))
+            submit();
+    }
     public void submit() {
         double _lt = Double.parseDouble(parse(lt.getText())+"."+parse(ltd.getText()));
         double _fat = Double.parseDouble(parse(ft.getText())+"."+parse(ftd.getText()));
@@ -57,9 +67,10 @@ public class MilkController implements Initializable {
             str.append("\nAmount : ").append(_amount);
 
             if( (CommanUtils.confirmationAlert("Dairy Slip ", str.toString())).equalsIgnoreCase("OK") ) {
-                milkService.saveData(cb.getValue(), datePicker.getValue(), _lt, _fat, _rate, _amount);
+                milkService.saveData(cb.getValue(), datePicker.getValue(), _lt, _fat, _rate, _amount, code.getText());
                 CommanUtils.informationAlert("Information", "Dairy Slip Saved.");
-                renderTotalData();
+                renderTotalData(code.getText());
+                clearAllFields();
             }
         }else {
             CommanUtils.warningAlert("Warning", "Please Fill All The Fields");
@@ -107,10 +118,24 @@ public class MilkController implements Initializable {
         ObservableList<String> options = FXCollections.observableArrayList("MORNING","EVENING");
         cb.setItems(options);
         datePicker.setValue(LocalDate.now());
-        Platform.runLater(()-> lt.requestFocus());
+        TextFields.bindAutoCompletion(code, codes);
+        Platform.runLater(()-> code.requestFocus());
 
-        Thread totalData = new Thread(this::renderTotalData);
+        Thread totalData = new Thread(()->{renderTotalData("0");});
         totalData.start();
+        Thread dataTable = new Thread(this::renderDataTable);
+        dataTable.start();
+        lt.focusedProperty().addListener((ov, oldv, newV) -> {
+            if(codes.contains(code.getText())){
+                renderTotalData(code.getText());
+                recordLabel.setText(code.getText());
+            }else{
+                recordLabel.setText("ALL");
+                renderTotalData("0");
+                code.clear();
+                code.requestFocus();
+            }
+        });
     }
 
     public void nextPage (){
@@ -132,14 +157,10 @@ public class MilkController implements Initializable {
     private boolean validate(Double lt, Double fat, Double rate, Double amount) {
         return lt > 0.0 && fat > 0.0 && rate > 0.0 && amount > 0.0 && cb.getValue() != null && datePicker.getValue() != null;
     }
-    private  void renderTotalData (){
-
-        Thread tableThread = new Thread(this::renderDataTable);
-        tableThread.start();
-
-        morning.setText(milkService.totalLitersOfMilkByShift(Shift.MORNING).toString());
-        evening.setText(milkService.totalLitersOfMilkByShift(Shift.EVENING).toString());
-        MilkRecordModel model = milkService.milkRecord();
+    private  void renderTotalData (String code){
+        morning.setText(milkService.totalLitersOfMilkByShift(Shift.MORNING, code).toString());
+        evening.setText(milkService.totalLitersOfMilkByShift(Shift.EVENING, code).toString());
+        MilkRecordModel model = milkService.milkRecord(code);
         fat.setText(model.getFat().toString());
         rate.setText(model.getRate().toString());
         amount.setText(model.getAmount().toString());
@@ -161,5 +182,16 @@ public class MilkController implements Initializable {
     }
     private int parse (String str){
         return (str.equals(""))?0:Integer.parseInt(str);
+    }
+    private void clearAllFields() {
+        lt.clear();
+        ltd.clear();
+        rt.clear();
+        rtd.clear();
+        ft.clear();
+        ftd.clear();
+        at.clear();
+        atd.clear();
+        code.requestFocus();
     }
 }

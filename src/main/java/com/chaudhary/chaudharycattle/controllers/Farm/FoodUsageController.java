@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,8 @@ public class FoodUsageController implements Initializable {
 
     @FXML
     private TextField food,qty,unit,qtyd,chhar,gool,tail,bear;
+    @FXML
+    private ComboBox<String> cb;
     @FXML
     private TableView<FoodUsageTableView> table = new TableView<>();
     @FXML
@@ -54,6 +58,8 @@ public class FoodUsageController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ObservableList<String> options = FXCollections.observableArrayList("MORNING","EVENING");
+        cb.setItems(options);
         foodList = foodUsageService.getFoodList().stream().map(Food::getName).collect(Collectors.toList());
         TextFields.bindAutoCompletion(food,foodList);
         datePicker.setValue(LocalDate.now());
@@ -78,6 +84,10 @@ public class FoodUsageController implements Initializable {
         Thread rederTotalData = new Thread(this::renderTotalData);
         rederTotalData.start();
     }
+    public void submit_key(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER))
+            submit();
+    }
     public void submit (){
         double qty = Double.parseDouble(parse(this.qty.getText()) + "." + parse(this.qtyd.getText()));
         if(validate(qty)) {
@@ -86,7 +96,7 @@ public class FoodUsageController implements Initializable {
             str.append("\nUnit : ").append("KG");
             str.append("\nQty : ").append(qty);
             if((CommanUtils.confirmationAlert("Food Usage Slip ", str.toString())).equalsIgnoreCase("OK") ) {
-                if(foodUsageService.submit(food.getText(), qty)) {
+                if(foodUsageService.submit(food.getText(), qty, cb.getValue())) {
                     CommanUtils.informationAlert("Information", "Stock Updated & Data Inserted");
                     renderTotalData();
                     food.clear();
@@ -125,12 +135,12 @@ public class FoodUsageController implements Initializable {
         }
     }
     private  void renderTotalData (){
-        renderDataTable();
         FoodUsageRecordModel model = foodUsageService.foodUsageRecord();
         chhar.setText(model.getChhar().toString());
         gool.setText(model.getGool().toString());
         tail.setText(model.getTail().toString());
         bear.setText(model.getBear().toString());
+        renderDataTable();
     }
     private void renderDataTable (){
         foodCol.setCellValueFactory(new PropertyValueFactory<>("food"));
@@ -145,7 +155,7 @@ public class FoodUsageController implements Initializable {
         pagination.setText(""+(from)+" - "+(Math.min(to,totalRecord))+" / "+totalRecord);
     }
     private boolean validate(Double qty) {
-        return foodList.contains(food.getText()) && qty > 0.0;
+        return foodList.contains(food.getText()) && qty > 0.0 && cb.getValue() != null;
     }
     private int parse (String str){
         return (str.equals(""))?0:Integer.parseInt(str);

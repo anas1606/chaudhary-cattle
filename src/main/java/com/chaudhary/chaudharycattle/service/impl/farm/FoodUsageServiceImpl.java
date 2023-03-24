@@ -1,9 +1,12 @@
 package com.chaudhary.chaudharycattle.service.impl.farm;
 
+import com.chaudhary.chaudharycattle.entities.enums.Shift;
+import com.chaudhary.chaudharycattle.entities.farm.Buyer;
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.entities.farm.FoodUsage;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordModel;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageTableView;
+import com.chaudhary.chaudharycattle.repositories.farm.BuyerRepository;
 import com.chaudhary.chaudharycattle.repositories.farm.FoodRepository;
 import com.chaudhary.chaudharycattle.repositories.farm.FoodUsageRepository;
 import com.chaudhary.chaudharycattle.service.farm.FoodUsageService;
@@ -26,12 +29,16 @@ public class FoodUsageServiceImpl implements FoodUsageService {
     private FoodRepository foodRepository;
     @Autowired
     private FoodUsageRepository foodUsageRepository;
-
+    @Autowired
+    private BuyerRepository buyerRepository;
     @Override
     public List<Food> getFoodList() {
         return foodRepository.findAll();
     }
-
+    @Override
+    public List<Buyer> getBuyerList() {
+        return buyerRepository.findAll();
+    }
     @Override
     public String getFoodUnit(String name) {
         String unit = foodRepository.findUnitByName(name);
@@ -43,14 +50,14 @@ public class FoodUsageServiceImpl implements FoodUsageService {
 
     @Transactional
     @Override
-    public boolean submit(String name, Double qty) {
+    public boolean submit(String name, Double qty, String shift) {
         Food food = foodRepository.findByName(name);
         if(food!=null){
             try {
                 if(foodRepository.findQtyByName(name) >= qty) {
                     food.setStock(food.getStock() - qty);
                     foodRepository.save(food);
-                    FoodUsage foodUsage = new FoodUsage(food, LocalDate.now(), qty);
+                    FoodUsage foodUsage = new FoodUsage(food, LocalDate.now(), qty, Shift.valueOf(shift));
                     foodUsageRepository.save(foodUsage);
                     return true;
                 }else

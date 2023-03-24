@@ -17,18 +17,20 @@ public class Milk implements Serializable {
     private Long id;
     @Enumerated(EnumType.STRING)
     private Shift shift;
+    private String code;
     private LocalDate createdDate;
     private Double liters;
     private Double fat;
     private Double rate;
     private Double amount;
 
-    public Milk(Shift shift, LocalDate date, Double liters, Double fat, Double rate, Double amount) {
+    public Milk(Shift shift, LocalDate date, Double liters, Double fat, Double rate, Double amount, String code) {
         this.shift = shift;
         this.createdDate = date;
         this.liters = liters;
         this.fat = fat;
         this.rate = rate;
         this.amount = amount;
+        this.code = code;
     }
 }

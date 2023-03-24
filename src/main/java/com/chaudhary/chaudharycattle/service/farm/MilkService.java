@@ -8,10 +8,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MilkService {
-    void saveData (String shift, LocalDate date, Double liters, Double fat, Double rate, Double amount);
+    void saveData (String shift, LocalDate date, Double liters, Double fat, Double rate, Double amount, String code);
 
     List<MilkTableView> getTableData (int pageNo, int maxSize);
     int getTableDataCount ();
-    Double totalLitersOfMilkByShift (Shift shift);
-    MilkRecordModel milkRecord ();
+    Double totalLitersOfMilkByShift (Shift shift, String code);
+    MilkRecordModel milkRecord (String code);
 }

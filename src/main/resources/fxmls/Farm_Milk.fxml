@@ -52,7 +52,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="1131.0" layoutY="4.0" text="Present Month Record" textFill="#209fcb">
+            <Label layoutX="1131.0" layoutY="4.0" text="Present Month Record For - " textFill="#209fcb">
                <font>
                   <Font size="20.0" />
                </font>
@@ -72,17 +72,22 @@
             </TableView>
             <AnchorPane layoutY="479.0" prefHeight="450.0" prefWidth="1620.0" style="-fx-background-color: #209FCB;">
                <children>
+                  <TextField fx:id="code" alignment="CENTER" layoutX="50.0" layoutY="40.0" prefHeight="45.0" prefWidth="140.0" promptText="Code" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
                   <Label layoutX="50.0" layoutY="98.0" text="Liter's" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="lt" layoutX="50.0" layoutY="150.0" onKeyPressed="#isNumberlt" onKeyReleased="#isNumberlt" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="lt" alignment="CENTER" layoutX="50.0" layoutY="150.0" onKeyPressed="#isNumberlt" onKeyReleased="#isNumberlt" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="ltd" layoutX="211.0" layoutY="150.0" onKeyPressed="#isNumberltd" onKeyReleased="#isNumberltd" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="ltd" alignment="CENTER" layoutX="211.0" layoutY="150.0" onKeyPressed="#isNumberltd" onKeyReleased="#isNumberltd" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -92,12 +97,12 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="ft" layoutX="50.0" layoutY="314.0" onKeyPressed="#isNumberft" onKeyReleased="#isNumberft" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="ft" alignment="CENTER" layoutX="50.0" layoutY="314.0" onKeyPressed="#isNumberft" onKeyReleased="#isNumberft" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="ftd" layoutX="211.0" layoutY="314.0" onKeyPressed="#isNumberftd" onKeyReleased="#isNumberftd" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="ftd" alignment="CENTER" layoutX="211.0" layoutY="314.0" onKeyPressed="#isNumberftd" onKeyReleased="#isNumberftd" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -107,12 +112,12 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="rt" layoutX="455.0" layoutY="150.0" onKeyPressed="#isNumberrt" onKeyReleased="#isNumberrt" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="rt" alignment="CENTER" layoutX="455.0" layoutY="150.0" onKeyPressed="#isNumberrt" onKeyReleased="#isNumberrt" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="rtd" layoutX="615.0" layoutY="150.0" onKeyPressed="#isNumberrtd" onKeyReleased="#isNumberrtd" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="rtd" alignment="CENTER" layoutX="615.0" layoutY="150.0" onKeyPressed="#isNumberrtd" onKeyReleased="#isNumberrtd" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -122,12 +127,12 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="at" layoutX="455.0" layoutY="314.0" onKeyPressed="#isNumberat" onKeyReleased="#isNumberat" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="at" alignment="CENTER" layoutX="455.0" layoutY="314.0" onKeyPressed="#isNumberat" onKeyReleased="#isNumberat" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="atd" layoutX="615.0" layoutY="314.0" onKeyPressed="#isNumberatd" onKeyReleased="#isNumberatd" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="atd" alignment="CENTER" layoutX="615.0" layoutY="314.0" onKeyPressed="#isNumberatd" onKeyReleased="#isNumberatd" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -138,7 +143,7 @@
                      </cursor>
                   </ComboBox>
                   <DatePicker fx:id="datePicker" layoutX="885.0" layoutY="320.0" prefHeight="39.0" prefWidth="189.0" style="-fx-background-color: #FFFFFF; -fx-font-size: 20;" />
-                  <Button layoutX="1446.0" layoutY="27.0" mnemonicParsing="false" onAction="#submit" prefHeight="42.0" prefWidth="125.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="   Save" textFill="#209fcb">
+                  <Button layoutX="1446.0" layoutY="27.0" mnemonicParsing="false" onAction="#submit" onKeyPressed="#submit_key" prefHeight="42.0" prefWidth="125.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="   Save" textFill="#209fcb">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -258,6 +263,11 @@
             <Label fx:id="pagination" layoutX="407.0" layoutY="447.0" text="1 - 10 / 0" textFill="#209fcb">
                <font>
                   <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="recordLabel" layoutX="1368.0" layoutY="6.0" text="ALL" textFill="#209fcb">
+               <font>
+                  <Font size="20.0" />
                </font>
             </Label>
          </children></AnchorPane>

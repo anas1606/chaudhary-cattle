@@ -58,6 +58,11 @@
                            <Font size="19.0" />
                        </font>
                    </Button>
+                  <Button fx:id="addBuyer" layoutX="31.0" layoutY="68.0" mnemonicParsing="false" onAction="#addNewBuyerPrompt" prefHeight="42.0" prefWidth="170.0" style="-fx-background-color: #209FCB; -fx-background-radius: 15; -fx-border-color: #FFFFFF; -fx-border-radius: 15;" text="Add New Buyer" textFill="WHITE">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
                   <TextField fx:id="food" alignment="CENTER" layoutX="31.0" layoutY="179.0" promptText="FOOD NAME" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
@@ -68,12 +73,17 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="rate" alignment="CENTER" layoutX="31.0" layoutY="309.0" onKeyPressed="#isNumberRate" onKeyReleased="#isNumberRate" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="buyer" alignment="CENTER" layoutX="610.0" layoutY="179.0" promptText="BUYER NAME" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="rated" alignment="CENTER" layoutX="159.0" layoutY="309.0" onKeyPressed="#isNumberRated" onKeyReleased="#isNumberRated" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="rate" alignment="CENTER" layoutX="32.0" layoutY="309.0" onKeyPressed="#isNumberRate" onKeyReleased="#isNumberRate" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="rated" alignment="CENTER" layoutX="160.0" layoutY="309.0" onKeyPressed="#isNumberRated" onKeyReleased="#isNumberRated" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -86,36 +96,36 @@
                      <font>
                         <Font size="24.0" />
                      </font></Label>
-                  <Label layoutX="47.0" layoutY="268.0" text="Rate" textFill="WHITE">
+                  <Label layoutX="48.0" layoutY="268.0" text="Rate" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font></Label>
-                  <TextField fx:id="qty" alignment="CENTER" layoutX="351.0" layoutY="309.0" onKeyPressed="#isNumberQty" onKeyReleased="#isNumberQty" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="qty" alignment="CENTER" layoutX="324.0" layoutY="309.0" onKeyPressed="#isNumberQty" onKeyReleased="#isNumberQty" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="qtyd" alignment="CENTER" layoutX="479.0" layoutY="309.0" onKeyPressed="#isNumberQtyd" onKeyReleased="#isNumberQtyd" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="qtyd" alignment="CENTER" layoutX="452.0" layoutY="309.0" onKeyPressed="#isNumberQtyd" onKeyReleased="#isNumberQtyd" prefHeight="45.0" prefWidth="110.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="367.0" layoutY="268.0" text="Qty" textFill="WHITE">
+                  <Label layoutX="340.0" layoutY="268.0" text="Qty" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="amount" alignment="CENTER" layoutX="639.0" layoutY="179.0" prefHeight="45.0" prefWidth="257.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="amount" alignment="CENTER" layoutX="619.0" layoutY="309.0" prefHeight="45.0" prefWidth="257.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <Label layoutX="647.0" layoutY="138.0" text="Amount" textFill="WHITE">
+                  <Label layoutX="627.0" layoutY="268.0" text="Amount" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                   <DatePicker fx:id="datePicker" layoutX="639.0" layoutY="312.0" prefHeight="40.0" prefWidth="255.0" style="-fx-font-size: 20; -fx-background-color: #FFFFFF;" />
+                   <DatePicker fx:id="datePicker" layoutX="946.0" layoutY="182.0" prefHeight="40.0" prefWidth="255.0" style="-fx-font-size: 20; -fx-background-color: #FFFFFF;" />
                   <Button fx:id="save" layoutX="1413.0" layoutY="17.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save" textFill="#209fcb">
                      <font>
                         <Font size="19.0" />
@@ -133,12 +143,12 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="unitAdd" alignment="CENTER" layoutX="558.0" layoutY="19.0" prefHeight="45.0" prefWidth="163.0" promptText="UNIT" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" visible="false">
+                  <TextField fx:id="unitAdd" alignment="CENTER" layoutX="558.0" layoutY="18.0" prefHeight="45.0" prefWidth="163.0" promptText="UNIT" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" visible="false">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="saveNewFood" layoutX="753.0" layoutY="21.0" mnemonicParsing="false" onAction="#addNewFood" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save" textFill="#209fcb" visible="false">
+                  <Button fx:id="saveNewFood" layoutX="753.0" layoutY="18.0" mnemonicParsing="false" onAction="#addNewFood" prefHeight="42.0" prefWidth="167.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save Food" textFill="#209fcb" visible="false">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -150,6 +160,33 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <TextField fx:id="buyerAdd" alignment="CENTER" layoutX="234.0" layoutY="68.0" promptText="BUYER NAME" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" visible="false">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="contactAdd" alignment="CENTER" layoutX="558.0" layoutY="68.0" prefHeight="45.0" prefWidth="226.0" promptText="CONTACT" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" visible="false">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="saveNewBuyer" layoutX="803.0" layoutY="68.0" mnemonicParsing="false" onAction="#addNewBuyer" prefHeight="42.0" prefWidth="172.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save Buyer" textFill="#209fcb" visible="false">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/save.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Label layoutX="626.0" layoutY="138.0" text="Buyer" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
             <TableView layoutX="8.0" layoutY="6.0" prefHeight="422.0" prefWidth="870.0" style="-fx-border-color: #209FCB; -fx-border-width: 2px; -fx-background-color: #FFFFFF; -fx-font-size: 20;">
               <columns>

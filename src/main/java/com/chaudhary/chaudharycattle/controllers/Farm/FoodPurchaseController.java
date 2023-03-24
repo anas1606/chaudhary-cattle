@@ -1,5 +1,6 @@
 package com.chaudhary.chaudharycattle.controllers.Farm;
 
+import com.chaudhary.chaudharycattle.entities.farm.Buyer;
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.service.farm.FoodPurchasedService;
 import com.chaudhary.chaudharycattle.service.farm.FoodUsageService;
@@ -23,16 +24,17 @@ import java.util.stream.Collectors;
 @Controller
 public class FoodPurchaseController implements Initializable {
     @FXML
-    private TextField food,unit,rate,rated,qty,qtyd,amount,foodAdd,unitAdd;
+    private TextField food,unit,rate,rated,qty,qtyd,amount,foodAdd,unitAdd,buyerAdd,contactAdd,buyer;
     @FXML
     private DatePicker datePicker;
     @FXML
-    private Button addFood, saveNewFood, save;
+    private Button addFood, addBuyer, saveNewFood, saveNewBuyer, save;
     @Autowired
     private FoodUsageService foodUsageService;
     @Autowired
     private FoodPurchasedService foodPurchasedService;
     private static List<String> foodList;
+    private static List<String> buyerList;
     private static int pageNo = 0;
     private static final int maxSize = 10;
     private static int from = 1;
@@ -43,6 +45,9 @@ public class FoodPurchaseController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         foodList = foodUsageService.getFoodList().stream().map(Food::getName).collect(Collectors.toList());
         TextFields.bindAutoCompletion(food,foodList);
+        buyerList = foodUsageService.getBuyerList().stream().map(Buyer::getName).collect(Collectors.toList());
+        TextFields.bindAutoCompletion(buyer,buyerList);
+
         datePicker.setValue(LocalDate.now());
         Platform.runLater(()-> food.requestFocus());
 
@@ -54,6 +59,8 @@ public class FoodPurchaseController implements Initializable {
                 qtyd.clear();
                 rate.clear();
                 rated.clear();
+                amount.clear();
+                buyer.clear();
                 food.clear();
                 food.requestFocus();
             }else{
@@ -62,7 +69,9 @@ public class FoodPurchaseController implements Initializable {
                 qtyd.clear();
                 rate.clear();
                 rated.clear();
-                rate.requestFocus();
+                amount.clear();
+                buyer.clear();
+                buyer.requestFocus();
             }
         });
     }
@@ -96,16 +105,35 @@ public class FoodPurchaseController implements Initializable {
             CommanUtils.informationAlert("Information", "New Food Inserted");
             foodList = foodUsageService.getFoodList().stream().map(Food::getName).collect(Collectors.toList());
             TextFields.bindAutoCompletion(food,foodList);
+            setAddNewProductVisible(false);
+            save.setVisible(true);
+            food.requestFocus();
         }else {
             CommanUtils.warningAlert("Warning", "Food Already Exist");
+            foodAdd.clear();
+            unitAdd.clear();
+            foodAdd.requestFocus();
         }
-        foodAdd.clear();
-        unitAdd.clear();
-        foodAdd.requestFocus();
+    }
+    public void addNewBuyer (){
+        if(validateAddNewBuyer() && foodPurchasedService.addNewBuyer(buyerAdd.getText(),contactAdd.getText())){
+            CommanUtils.informationAlert("Information", "New Buyer Inserted");
+            buyerList = foodUsageService.getBuyerList().stream().map(Buyer::getName).collect(Collectors.toList());
+            TextFields.bindAutoCompletion(buyer,buyerList);
+            setAddNewBuyerVisible(false);
+            save.setVisible(true);
+            food.requestFocus();
+        }else {
+            CommanUtils.warningAlert("Warning", "Buyer Already Exist");
+            buyerAdd.clear();
+            contactAdd.clear();
+            buyerAdd.requestFocus();
+        }
     }
     public void addNewFoodPrompt (){
         if(addFood.getText().equalsIgnoreCase("Add New Food")) {
             setAddNewProductVisible(true);
+            setAddNewBuyerVisible(false);
             save.setVisible(false);
             foodAdd.requestFocus();
             addFood.setText("Close Add Food");
@@ -113,9 +141,20 @@ public class FoodPurchaseController implements Initializable {
             setAddNewProductVisible(false);
             save.setVisible(true);
             food.requestFocus();
-            addFood.setText("Add New Food");
         }
-
+    }
+    public void addNewBuyerPrompt (){
+        if(addBuyer.getText().equalsIgnoreCase("Add New Buyer")) {
+            setAddNewBuyerVisible(true);
+            setAddNewProductVisible(false);
+            save.setVisible(false);
+            buyerAdd.requestFocus();
+            addBuyer.setText("Close Add Buyer");
+        }else{
+            setAddNewBuyerVisible(false);
+            save.setVisible(true);
+            food.requestFocus();
+        }
     }
     public void isNumberAmt(){
         CommanUtils.numberFormate(amount);
@@ -137,8 +176,18 @@ public class FoodPurchaseController implements Initializable {
         foodAdd.setVisible(val);
         unitAdd.setVisible(val);
         saveNewFood.setVisible(val);
+        addFood.setText("Add New Food");
+    }
+    private void setAddNewBuyerVisible (boolean val){
+        buyerAdd.setVisible(val);
+        contactAdd.setVisible(val);
+        saveNewBuyer.setVisible(val);
+        addBuyer.setText("Add New Buyer");
     }
     private boolean validateAddNewFood (){
         return (!foodAdd.getText().equalsIgnoreCase("") && foodAdd.getText() != null && !unitAdd.getText().equalsIgnoreCase("") && unitAdd.getText() != null);
+    }
+    private boolean validateAddNewBuyer (){
+        return (!buyerAdd.getText().equalsIgnoreCase("") && buyerAdd.getText() != null && !contactAdd.getText().equalsIgnoreCase("") && contactAdd.getText() != null);
     }
 }

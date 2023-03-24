@@ -13,6 +13,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,8 +26,8 @@ public class MilkServiceImpl implements MilkService {
 
     @Transactional
     @Override
-    public void saveData(String shift, LocalDate date, Double liters, Double fat, Double rate, Double amount) {
-        milkRepository.save( new Milk(Shift.valueOf(shift), date, liters, fat, rate, amount) );
+    public void saveData(String shift, LocalDate date, Double liters, Double fat, Double rate, Double amount, String code) {
+        milkRepository.save( new Milk(Shift.valueOf(shift), date, liters, fat, rate, amount, code) );
     }
 
     @Override
@@ -44,13 +46,19 @@ public class MilkServiceImpl implements MilkService {
     }
 
     @Override
-    public Double totalLitersOfMilkByShift(Shift shift) {
-        Double val = milkRepository.sumOfLitersByCreatedDateBetweenAndShift(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), shift.name());
-        return (val != null) ? val : 0.0;
+    public Double totalLitersOfMilkByShift(Shift shift, String code) {
+        Double val;
+        if(code.equalsIgnoreCase("0"))
+            return milkRepository.sumOfLitersByCreatedDateBetweenAndShift(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), shift.name(), Arrays.asList("0599","0868"));
+        else
+            return milkRepository.sumOfLitersByCreatedDateBetweenAndShift(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), shift.name(),Collections.singletonList(code));
     }
 
     @Override
-    public MilkRecordModel milkRecord() {
-        return milkRepository.milkRecord(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1));
+    public MilkRecordModel milkRecord(String code) {
+        if(code.equalsIgnoreCase("0"))
+            return milkRepository.milkRecord(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), Arrays.asList("0599","0868"));
+        else
+            return milkRepository.milkRecord(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), Collections.singletonList(code));
     }
 }

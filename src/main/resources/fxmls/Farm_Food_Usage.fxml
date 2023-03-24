@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -63,7 +64,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label layoutX="670.0" layoutY="100.0" text="Qty." textFill="WHITE">
+                  <Label layoutX="50.0" layoutY="250.0" text="Qty." textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -78,18 +79,19 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="qty" alignment="CENTER" layoutX="670.0" layoutY="170.0" onKeyPressed="#isNumber" onKeyReleased="#isNumber" prefHeight="45.0" prefWidth="113.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="qty" alignment="CENTER" layoutX="50.0" layoutY="320.0" onKeyPressed="#isNumber" onKeyReleased="#isNumber" prefHeight="45.0" prefWidth="113.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="qtyd" alignment="CENTER" layoutX="800.0" layoutY="170.0" onKeyPressed="#isNumberd" onKeyReleased="#isNumberd" prefHeight="45.0" prefWidth="113.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="qtyd" alignment="CENTER" layoutX="180.0" layoutY="320.0" onKeyPressed="#isNumberd" onKeyReleased="#isNumberd" prefHeight="45.0" prefWidth="113.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <DatePicker fx:id="datePicker" layoutX="1017.0" layoutY="175.0" prefHeight="39.0" prefWidth="189.0" style="-fx-font-size: 20; -fx-background-color: #FFFFFF;" />
-                  <Button layoutX="1289.0" layoutY="170.0" mnemonicParsing="false" onAction="#submit" prefHeight="42.0" prefWidth="125.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save" textFill="#209fcb">
+                  <ComboBox fx:id="cb" layoutX="414.0" layoutY="320.0" prefHeight="40.0" prefWidth="174.0" promptText="Select Shift" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-font-size: 20;" visibleRowCount="2" />
+                  <DatePicker fx:id="datePicker" layoutX="649.0" layoutY="170.0" prefHeight="39.0" prefWidth="189.0" style="-fx-font-size: 20; -fx-background-color: #FFFFFF;" />
+                  <Button layoutX="1401.0" layoutY="30.0" mnemonicParsing="false" onAction="#submit" onKeyPressed="#submit_key" prefHeight="42.0" prefWidth="125.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save" textFill="#209fcb">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -101,12 +103,12 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Label layoutX="788.0" layoutY="175.0" text="." textFill="WHITE">
+                  <Label layoutX="168.0" layoutY="325.0" text="." textFill="WHITE">
                      <font>
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Label layoutX="1020.0" layoutY="100.0" text="Date" textFill="WHITE">
+                  <Label layoutX="652.0" layoutY="100.0" text="Date" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>

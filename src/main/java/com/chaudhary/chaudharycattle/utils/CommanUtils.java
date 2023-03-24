@@ -47,7 +47,6 @@ public class CommanUtils implements Serializable {
     public static void switchToScene (String fxmlPath, Button btn, int width, int height){
         new ChaudharycattleApplication().switchToScene(fxmlPath, btn, width, height);
     }
-
     public static void loadPage (String fxmlPath){
         new ChaudharycattleApplication().loadPage(landing_bp, fxmlPath);
     }

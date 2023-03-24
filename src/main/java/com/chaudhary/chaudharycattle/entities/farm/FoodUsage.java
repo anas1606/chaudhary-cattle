@@ -1,5 +1,6 @@
 package com.chaudhary.chaudharycattle.entities.farm;
 
+import com.chaudhary.chaudharycattle.entities.enums.Shift;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,12 +19,15 @@ public class FoodUsage {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_food_id")
     private Food food;
+    @Enumerated(EnumType.STRING)
+    private Shift shift;
     private LocalDate createdDate;
     private Double qty;
 
-    public FoodUsage (Food food, LocalDate date, Double qty){
+    public FoodUsage (Food food, LocalDate date, Double qty, Shift shift){
         this.food = food;
         this.createdDate = date;
         this.qty = qty;
+        this.shift = shift;
     }
 }

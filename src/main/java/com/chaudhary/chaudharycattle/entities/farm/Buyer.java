@@ -1,6 +1,5 @@
 package com.chaudhary.chaudharycattle.entities.farm;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,18 +11,17 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Food {
+public class Buyer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int bid;
     private String name;
-    private String unit;
-    private Double stock;
+    private String contact;
+    private Double amount;
 
-    public Food (String name, String unit, Double stock) {
+    public Buyer(String name, String contact, Double amount) {
         this.name = name;
-        this.unit = unit;
-        this.stock = stock;
+        this.contact = contact;
+        this.amount = amount;
     }
 }
