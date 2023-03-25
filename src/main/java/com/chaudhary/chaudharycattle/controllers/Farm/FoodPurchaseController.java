@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,6 +77,30 @@ public class FoodPurchaseController implements Initializable {
             }
         });
     }
+    public void submit_key(KeyEvent event) {
+        if(event.getCode().equals(KeyCode.ENTER))
+            submit();
+    }
+    public void submit (){
+        double _rate = Double.parseDouble(parse(rate.getText())+"."+parse(rated.getText()));
+        double _qty = Double.parseDouble(parse(qty.getText())+"."+parse(qtyd.getText()));
+        double _amount =  parse(amount.getText());
+        StringBuilder str = new StringBuilder();
+        str.append("Date : ").append(datePicker.getValue());
+        str.append("\nFood : ").append(food.getText());
+        str.append("\nSupplier : ").append(buyer.getText());
+        str.append("\nRate : ").append(_rate);
+        str.append("\nQty : ").append(_qty);
+        str.append("\nAmount : ").append(_amount);
+        if( (CommanUtils.confirmationAlert("Purchase Slip ", str.toString())).equalsIgnoreCase("OK") ) {
+            if (foodPurchasedService.submit(food.getText(), buyer.getText(), _rate, _qty, _amount, datePicker.getValue())) {
+                CommanUtils.informationAlert("Information", "Food Stock & Supplier Leader Updated");
+                clearFields();
+            }else
+                CommanUtils.warningAlert("Warning", "Check The Filed Something Wrong");
+        }
+    }
+
     public void loadMilk(){
         CommanUtils.loadPage(FxmlPaths.FARM_MILK);
     }
@@ -189,5 +215,20 @@ public class FoodPurchaseController implements Initializable {
     }
     private boolean validateAddNewBuyer (){
         return (!buyerAdd.getText().equalsIgnoreCase("") && buyerAdd.getText() != null && !contactAdd.getText().equalsIgnoreCase("") && contactAdd.getText() != null);
+    }
+    private int parse (String str){
+        return (str.equals(""))?0:Integer.parseInt(str);
+    }
+    private void clearFields(){
+        food.clear();
+        food.requestFocus();
+        unit.clear();
+        buyer.clear();
+        rate.clear();
+        rated.clear();
+        qty.clear();
+        qtyd.clear();
+        amount.clear();
+        datePicker.setValue(LocalDate.now());
     }
 }
