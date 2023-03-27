@@ -47,7 +47,7 @@ public class MilkController implements Initializable {
     private static int from = 1;
     private static int to = maxSize;
     private static int totalRecord = 0;
-    private static List<String> codes = new ArrayList<>(Arrays.asList("0599","0868"));
+    private static final List<String> codes = new ArrayList<>(Arrays.asList("0599","0868"));
     public void submit_key(KeyEvent event) {
         if(event.getCode().equals(KeyCode.ENTER))
             submit();

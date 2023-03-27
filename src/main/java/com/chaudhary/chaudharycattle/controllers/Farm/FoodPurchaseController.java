@@ -2,16 +2,18 @@ package com.chaudhary.chaudharycattle.controllers.Farm;
 
 import com.chaudhary.chaudharycattle.entities.farm.Buyer;
 import com.chaudhary.chaudharycattle.entities.farm.Food;
+import com.chaudhary.chaudharycattle.model.farm.FoodPurchaseTableView;
 import com.chaudhary.chaudharycattle.service.farm.FoodPurchasedService;
 import com.chaudhary.chaudharycattle.service.farm.FoodUsageService;
 import com.chaudhary.chaudharycattle.utils.CommanUtils;
 import com.chaudhary.chaudharycattle.utils.FxmlPaths;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.TextFields;
@@ -31,6 +33,12 @@ public class FoodPurchaseController implements Initializable {
     private DatePicker datePicker;
     @FXML
     private Button addFood, addBuyer, saveNewFood, saveNewBuyer, save;
+    @FXML
+    private Label pagination;
+    @FXML
+    private TableView<FoodPurchaseTableView> table = new TableView<>();
+    @FXML
+    private TableColumn<FoodPurchaseTableView, String> foodCol,supplierCol,rateCol,qtyCol,amountCol,dateCol;
     @Autowired
     private FoodUsageService foodUsageService;
     @Autowired
@@ -76,6 +84,7 @@ public class FoodPurchaseController implements Initializable {
                 buyer.requestFocus();
             }
         });
+        renderDataTable();
     }
     public void submit_key(KeyEvent event) {
         if(event.getCode().equals(KeyCode.ENTER))
@@ -84,21 +93,25 @@ public class FoodPurchaseController implements Initializable {
     public void submit (){
         double _rate = Double.parseDouble(parse(rate.getText())+"."+parse(rated.getText()));
         double _qty = Double.parseDouble(parse(qty.getText())+"."+parse(qtyd.getText()));
-        double _amount =  parse(amount.getText());
-        StringBuilder str = new StringBuilder();
-        str.append("Date : ").append(datePicker.getValue());
-        str.append("\nFood : ").append(food.getText());
-        str.append("\nSupplier : ").append(buyer.getText());
-        str.append("\nRate : ").append(_rate);
-        str.append("\nQty : ").append(_qty);
-        str.append("\nAmount : ").append(_amount);
-        if( (CommanUtils.confirmationAlert("Purchase Slip ", str.toString())).equalsIgnoreCase("OK") ) {
-            if (foodPurchasedService.submit(food.getText(), buyer.getText(), _rate, _qty, _amount, datePicker.getValue())) {
-                CommanUtils.informationAlert("Information", "Food Stock & Supplier Leader Updated");
-                clearFields();
-            }else
-                CommanUtils.warningAlert("Warning", "Check The Filed Something Wrong");
-        }
+        double _amount =  parseAmount(amount.getText());
+        if(validate(_rate, _qty, _amount)){
+            StringBuilder str = new StringBuilder();
+            str.append("Date : ").append(datePicker.getValue());
+            str.append("\nFood : ").append(food.getText());
+            str.append("\nSupplier : ").append(buyer.getText());
+            str.append("\nRate : ").append(_rate);
+            str.append("\nQty : ").append(_qty);
+            str.append("\nAmount : ").append(_amount);
+            if( (CommanUtils.confirmationAlert("Purchase Slip ", str.toString())).equalsIgnoreCase("OK") ) {
+                if (foodPurchasedService.submit(food.getText(), buyer.getText(), _rate, _qty, _amount, datePicker.getValue())) {
+                    CommanUtils.informationAlert("Information", "Food Stock & Supplier Leader Updated");
+                    renderDataTable();
+                    clearFields();
+                }
+            }
+        } else
+            CommanUtils.warningAlert("Warning", "Check The Filed Something Wrong");
+
     }
 
     public void loadMilk(){
@@ -115,7 +128,7 @@ public class FoodPurchaseController implements Initializable {
             pageNo++;
             from = to + 1;
             to = to + maxSize;
-//            renderDataTable();
+            renderDataTable();
         }
     }
     public void prevPage (){
@@ -123,7 +136,7 @@ public class FoodPurchaseController implements Initializable {
             pageNo--;
             from = from - maxSize;
             to = to - maxSize;
-//            renderDataTable();
+            renderDataTable();
         }
     }
     public void addNewFood (){
@@ -182,6 +195,21 @@ public class FoodPurchaseController implements Initializable {
             food.requestFocus();
         }
     }
+    private void renderDataTable (){
+        foodCol.setCellValueFactory(new PropertyValueFactory<>("food"));
+        supplierCol.setCellValueFactory(new PropertyValueFactory<>("buyer"));
+        rateCol.setCellValueFactory(new PropertyValueFactory<>("rate"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        //Creating a table view
+        final ObservableList<FoodPurchaseTableView> data = FXCollections.observableArrayList(
+                foodPurchasedService.getTableData(pageNo, maxSize)
+        );
+        totalRecord = foodPurchasedService.getTableDataCount();
+        table.setItems(data);
+        pagination.setText(""+(from)+" - "+(Math.min(to,totalRecord))+" / "+totalRecord);
+    }
     public void isNumberAmt(){
         CommanUtils.numberFormate(amount);
     }
@@ -217,7 +245,23 @@ public class FoodPurchaseController implements Initializable {
         return (!buyerAdd.getText().equalsIgnoreCase("") && buyerAdd.getText() != null && !contactAdd.getText().equalsIgnoreCase("") && contactAdd.getText() != null);
     }
     private int parse (String str){
-        return (str.equals(""))?0:Integer.parseInt(str);
+        try {
+            return (str.equals("")) ? 0 : Integer.parseInt(str);
+        }catch (Exception exception){
+            CommanUtils.warningAlert("Warning","Something Wrong Please Check The Fields");
+        }
+        return 0;
+    }
+    private double parseAmount (String str){
+        try {
+            return (str.equals("")) ? 0.0 : Double.parseDouble(str);
+        }catch (Exception exception){
+            CommanUtils.warningAlert("Warning","Something Wrong Please Check The Fields");
+        }
+        return 0.0;
+    }
+    private boolean validate(Double rate, Double qty, Double amount) {
+        return rate > 0.0 && qty > 0.0 && amount > 0.0;
     }
     private void clearFields(){
         food.clear();
