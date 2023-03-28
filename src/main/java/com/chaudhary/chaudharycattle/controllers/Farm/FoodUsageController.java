@@ -140,7 +140,7 @@ public class FoodUsageController implements Initializable {
         gool.setText(model.getGool().toString());
         tail.setText(model.getTail().toString());
         bear.setText(model.getBear().toString());
-        renderDataTable();
+//        renderDataTable();
     }
     private void renderDataTable (){
         foodCol.setCellValueFactory(new PropertyValueFactory<>("food"));

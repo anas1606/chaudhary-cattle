@@ -15,10 +15,10 @@ public class DashboardTableView {
 
     public DashboardTableView(Food food){
         this.name = food.getName();
-        this.amount = food.getStock();
+        this.amount = Double.parseDouble(String.format("%.2f", food.getStock()));
     }
     public DashboardTableView(Supplier supplier){
         this.name = supplier.getName();
-        this.amount = supplier.getAmount();
+        this.amount = Double.parseDouble(String.format("%.2f", supplier.getAmount()));
     }
 }

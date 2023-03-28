@@ -14,7 +14,9 @@ public interface FoodUsageRepository extends JpaRepository<FoodUsage, Integer> {
 
     Page<FoodUsage> findAllByCreatedDateBetween (LocalDate startDate, LocalDate endDate, Pageable page);
     Integer countOfIdByCreatedDateBetween(LocalDate startDate, LocalDate endDate);
-
     @Query(value = "SELECT SUM(qty) FROM FoodUsage WHERE createdDate BETWEEN ?1 AND ?2 AND fk_food_id = ?3",nativeQuery = true)
     Double sumOfQtyByCreatedDateBetweenAndFk_food_id (LocalDate startDate, LocalDate endDate, int food);
+    @Query(value = "SELECT IFNULL(ROUND(SUM(amount),2),0.0) FROM FoodUsage WHERE createdDate BETWEEN ?1 AND ?2",nativeQuery = true)
+    Double sumOfAmountByCreatedDateBetween (LocalDate startDate, LocalDate endDate);
+
 }

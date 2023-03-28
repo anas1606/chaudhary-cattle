@@ -15,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
@@ -45,7 +44,7 @@ public class FoodPurchasedServiceImpl implements FoodPurchasedService {
             supplierLedgerRepository.save(model);
             food.setStock(food.getStock()+qty);
             foodRepository.save(food);
-            FoodPurchase foodPurchase = new FoodPurchase(food,rate,qty,qty,date);
+            FoodPurchase foodPurchase = new FoodPurchase(food,rate,qty,qty,amount,date);
             foodPurchaseRepository.save(foodPurchase);
             return true;
         }

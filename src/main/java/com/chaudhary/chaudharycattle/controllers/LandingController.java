@@ -40,6 +40,6 @@ public class LandingController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CommanUtils.setLandingBorderPane(bp);
-//        openDashboard();
+        openDashboard();
     }
 }

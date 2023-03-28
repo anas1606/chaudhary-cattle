@@ -102,5 +102,49 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="900.0" layoutY="483.0" prefHeight="404.0" prefWidth="376.0" style="-fx-background-color: #209FCB; -fx-background-radius: 50;">
+         <children>
+            <Label layoutX="100.0" layoutY="28.0" text="Total Milk Income" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="100.0" layoutY="118.0" text="Total Food Expense" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="100.0" layoutY="208.0" text="Total Other Expense" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="148.0" layoutY="294.0" text="Profit" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalMilkIncome" alignment="CENTER" layoutX="12.0" layoutY="60.0" prefHeight="44.0" prefWidth="352.0" text="0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalFoodExp" alignment="CENTER" layoutX="12.0" layoutY="150.0" prefHeight="44.0" prefWidth="352.0" text="0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalOtherExp" alignment="CENTER" layoutX="12.0" layoutY="240.0" prefHeight="44.0" prefWidth="352.0" text="0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="profit" alignment="CENTER" layoutX="13.0" layoutY="343.0" prefHeight="50.0" prefWidth="352.0" text="0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

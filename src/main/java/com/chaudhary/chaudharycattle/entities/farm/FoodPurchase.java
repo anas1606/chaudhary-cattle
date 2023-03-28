@@ -21,13 +21,15 @@ public class FoodPurchase {
     private Double rate;
     private Double qty;
     private Double rQty;
+    private Double amount;
     private LocalDate createdDate;
 
-    public FoodPurchase(Food fId, Double rate, Double qty, Double rQty, LocalDate createdDate) {
+    public FoodPurchase(Food fId, Double rate, Double qty, Double rQty, Double amount, LocalDate createdDate) {
         this.fId = fId;
         this.rate = rate;
         this.qty = qty;
         this.rQty = rQty;
+        this.amount = amount;
         this.createdDate = createdDate;
     }
 }

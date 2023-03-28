@@ -12,11 +12,13 @@ import javafx.stage.Stage;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.io.IOException;
 import java.util.Objects;
 
 
+@EnableTransactionManagement
 @SpringBootApplication
 public class ChaudharycattleApplication extends Application{
 

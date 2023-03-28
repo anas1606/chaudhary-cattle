@@ -1,16 +1,17 @@
 package com.chaudhary.chaudharycattle.service.impl.farm;
 
 import com.chaudhary.chaudharycattle.entities.enums.Shift;
+import com.chaudhary.chaudharycattle.entities.farm.FoodPurchase;
 import com.chaudhary.chaudharycattle.entities.farm.Supplier;
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.entities.farm.FoodUsage;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordModel;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageTableView;
+import com.chaudhary.chaudharycattle.repositories.farm.FoodPurchaseRepository;
 import com.chaudhary.chaudharycattle.repositories.farm.SupplierRepository;
 import com.chaudhary.chaudharycattle.repositories.farm.FoodRepository;
 import com.chaudhary.chaudharycattle.repositories.farm.FoodUsageRepository;
 import com.chaudhary.chaudharycattle.service.farm.FoodUsageService;
-import com.chaudhary.chaudharycattle.utils.CommanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,19 +31,26 @@ public class FoodUsageServiceImpl implements FoodUsageService {
     @Autowired
     private FoodUsageRepository foodUsageRepository;
     @Autowired
+    private FoodPurchaseRepository foodPurchaseRepository;
+    @Autowired
     private SupplierRepository supplierRepository;
+    private static final LocalDate startDate = LocalDate.now().withDayOfMonth(1);
+    private static final LocalDate endDate = startDate.plusMonths(1).minusDays(1);
+
     @Override
     public List<Food> getFoodList() {
         return foodRepository.findAll();
     }
+
     @Override
     public List<Supplier> getBuyerList() {
         return supplierRepository.findAll();
     }
+
     @Override
     public String getFoodUnit(String name) {
         String unit = foodRepository.findUnitByName(name);
-        if(unit != null)
+        if (unit != null)
             return unit;
         else
             return "";
@@ -52,34 +60,50 @@ public class FoodUsageServiceImpl implements FoodUsageService {
     @Override
     public boolean submit(String name, Double qty, String shift) {
         Food food = foodRepository.findByName(name);
-        if(food!=null){
-            try {
-                if(foodRepository.findQtyByName(name) >= qty) {
-                    food.setStock(food.getStock() - qty);
-                    foodRepository.save(food);
-                    FoodUsage foodUsage = new FoodUsage(food, LocalDate.now(), qty, Shift.valueOf(shift));
-                    foodUsageRepository.save(foodUsage);
-                    return true;
-                }else
-                    return false;
-            }catch (Exception e){
-                CommanUtils.warningAlert("Warning", "Something Wrong.\nPlease Try Again");
-            }
+        if (food != null) {
+            if (foodRepository.findQtyByName(name) >= qty) {
+                food.setStock(food.getStock() - qty);
+                foodRepository.save(food);
+
+                List<FoodPurchase> foodPurchaseList = foodPurchaseRepository.findAllByFid(food);
+                Double tQty = qty;
+                for (FoodPurchase foodPurchase : foodPurchaseList) {
+                    if (foodPurchase.getRQty() >= tQty) {
+//                      Update Food Purchased Stock
+                        foodPurchase.setRQty(foodPurchase.getRQty() - tQty);
+                        foodPurchaseRepository.save(foodPurchase);
+
+                        FoodUsage foodUsage = new FoodUsage(food, LocalDate.now(), tQty, Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()*tQty);
+                        foodUsageRepository.save(foodUsage);
+                        break;
+                    } else {
+
+                        FoodUsage foodUsage = new FoodUsage(food, LocalDate.now(), foodPurchase.getRQty(), Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()* foodPurchase.getRQty());
+                        foodUsageRepository.save(foodUsage);
+
+                        tQty = tQty - foodPurchase.getRQty();
+                        foodPurchase.setRQty(0.0);
+                        foodPurchaseRepository.save(foodPurchase);
+                    }
+                }
+                return true;
+            } else
+                return false;
         }
         return false;
     }
 
     @Override
     public List<FoodUsageTableView> getDataTable(int pageNo, int maxSize) {
-        Pageable page = PageRequest.of(pageNo,maxSize, Sort.Direction.DESC, "createdDate");
-        List<FoodUsage> data = foodUsageRepository.findAllByCreatedDateBetween(LocalDate.now().minusDays(50), LocalDate.now().plusMonths(1), page).toList();
+        Pageable page = PageRequest.of(pageNo, maxSize, Sort.Direction.DESC, "createdDate");
+        List<FoodUsage> data = foodUsageRepository.findAllByCreatedDateBetween(startDate, endDate, page).toList();
         return data.stream().map(FoodUsageTableView::new).collect(Collectors.toList());
     }
 
     @Override
     public int getTableDataCount() {
         LocalDate sdate = LocalDate.now();
-        Integer count =  foodUsageRepository.countOfIdByCreatedDateBetween(sdate.minusDays(50), sdate.plusMonths(1));
+        Integer count = foodUsageRepository.countOfIdByCreatedDateBetween(startDate, endDate);
         return count != null ? count : 0;
     }
 
@@ -88,10 +112,10 @@ public class FoodUsageServiceImpl implements FoodUsageService {
         LocalDate sdate = LocalDate.now().minusDays(50);
         LocalDate edate = LocalDate.now().plusMonths(1);
         FoodUsageRecordModel model = new FoodUsageRecordModel();
-        Double tail = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate,edate,foodRepository.findByName("TAIL").getId());
-        Double gool = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate,edate,foodRepository.findByName("GOOL").getId());
-        Double chhar = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate,edate,foodRepository.findByName("CHHAR").getId());
-        Double bear = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id (sdate,edate,foodRepository.findByName("BEAR").getId());
+        Double tail = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate, edate, foodRepository.findByName("TAIL").getId());
+        Double gool = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate, edate, foodRepository.findByName("GOOL").getId());
+        Double chhar = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate, edate, foodRepository.findByName("CHHAR").getId());
+        Double bear = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate, edate, foodRepository.findByName("BEAR").getId());
         model.setTail(tail != null ? tail : 0.0);
         model.setGool(gool != null ? gool : 0.0);
         model.setChhar(chhar != null ? chhar : 0.0);

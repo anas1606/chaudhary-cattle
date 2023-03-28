@@ -107,6 +107,8 @@ public class FoodPurchaseController implements Initializable {
                     CommanUtils.informationAlert("Information", "Food Stock & Supplier Leader Updated");
                     renderDataTable();
                     clearFields();
+                }else{
+                    CommanUtils.warningAlert("Warning", "Check The Filed Something Wrong");
                 }
             }
         } else

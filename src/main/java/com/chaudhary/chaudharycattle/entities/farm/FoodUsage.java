@@ -23,11 +23,15 @@ public class FoodUsage {
     private Shift shift;
     private LocalDate createdDate;
     private Double qty;
+    private Double rate;
+    private Double amount;
 
-    public FoodUsage (Food food, LocalDate date, Double qty, Shift shift){
+    public FoodUsage (Food food, LocalDate date, Double qty, Shift shift,Double rate, Double amount){
         this.food = food;
         this.createdDate = date;
         this.qty = qty;
         this.shift = shift;
+        this.rate = rate;
+        this.amount = amount;
     }
 }
