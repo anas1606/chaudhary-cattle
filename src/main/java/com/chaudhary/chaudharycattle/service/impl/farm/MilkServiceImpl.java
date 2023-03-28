@@ -49,9 +49,9 @@ public class MilkServiceImpl implements MilkService {
     public Double totalLitersOfMilkByShift(Shift shift, String code) {
         Double val;
         if(code.equalsIgnoreCase("0"))
-            return milkRepository.sumOfLitersByCreatedDateBetweenAndShift(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), shift.name(), Arrays.asList("0599","0868"));
+            return milkRepository.sumOfLitersByCreatedDateBetweenAndShiftAndCode(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), shift.name(), Arrays.asList("0599","0868"));
         else
-            return milkRepository.sumOfLitersByCreatedDateBetweenAndShift(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), shift.name(),Collections.singletonList(code));
+            return milkRepository.sumOfLitersByCreatedDateBetweenAndShiftAndCode(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), shift.name(),Collections.singletonList(code));
     }
 
     @Override

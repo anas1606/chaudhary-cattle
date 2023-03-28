@@ -1,6 +1,6 @@
 package com.chaudhary.chaudharycattle.controllers.Farm;
 
-import com.chaudhary.chaudharycattle.entities.farm.Buyer;
+import com.chaudhary.chaudharycattle.entities.farm.Supplier;
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.model.farm.FoodPurchaseTableView;
 import com.chaudhary.chaudharycattle.service.farm.FoodPurchasedService;
@@ -55,7 +55,7 @@ public class FoodPurchaseController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         foodList = foodUsageService.getFoodList().stream().map(Food::getName).collect(Collectors.toList());
         TextFields.bindAutoCompletion(food,foodList);
-        buyerList = foodUsageService.getBuyerList().stream().map(Buyer::getName).collect(Collectors.toList());
+        buyerList = foodUsageService.getBuyerList().stream().map(Supplier::getName).collect(Collectors.toList());
         TextFields.bindAutoCompletion(buyer,buyerList);
 
         datePicker.setValue(LocalDate.now());
@@ -157,7 +157,7 @@ public class FoodPurchaseController implements Initializable {
     public void addNewBuyer (){
         if(validateAddNewBuyer() && foodPurchasedService.addNewBuyer(buyerAdd.getText(),contactAdd.getText())){
             CommanUtils.informationAlert("Information", "New Buyer Inserted");
-            buyerList = foodUsageService.getBuyerList().stream().map(Buyer::getName).collect(Collectors.toList());
+            buyerList = foodUsageService.getBuyerList().stream().map(Supplier::getName).collect(Collectors.toList());
             TextFields.bindAutoCompletion(buyer,buyerList);
             setAddNewBuyerVisible(false);
             save.setVisible(true);

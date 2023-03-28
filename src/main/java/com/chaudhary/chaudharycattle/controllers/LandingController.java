@@ -30,7 +30,7 @@ public class LandingController implements Initializable {
     }
 
     public void openDashboard(){
-        CommanUtils.loadPage(FxmlPaths.FARM_MILK);
+        CommanUtils.loadPage(FxmlPaths.DASHBOARD);
     }
     public void openFarm(){
         CommanUtils.loadPage(FxmlPaths.FARM_MILK);
@@ -40,5 +40,6 @@ public class LandingController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CommanUtils.setLandingBorderPane(bp);
+//        openDashboard();
     }
 }

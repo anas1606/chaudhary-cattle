@@ -8,13 +8,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Data
 @Entity
-public class BuyerLedger {
+public class SupplierLedger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int blId;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bId")
-    private Buyer bId;
+    private Supplier bId;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fId")
     private Food fId;
@@ -23,7 +23,7 @@ public class BuyerLedger {
     private Double amount;
     private LocalDate createdDate;
 
-    public BuyerLedger(Buyer bId, Food fId, Double rate, Double qty, Double amount, LocalDate createdDate) {
+    public SupplierLedger(Supplier bId, Food fId, Double rate, Double qty, Double amount, LocalDate createdDate) {
         this.bId = bId;
         this.fId = fId;
         this.rate = rate;

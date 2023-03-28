@@ -1,12 +1,12 @@
 package com.chaudhary.chaudharycattle.service.impl.farm;
 
 import com.chaudhary.chaudharycattle.entities.enums.Shift;
-import com.chaudhary.chaudharycattle.entities.farm.Buyer;
+import com.chaudhary.chaudharycattle.entities.farm.Supplier;
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.entities.farm.FoodUsage;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordModel;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageTableView;
-import com.chaudhary.chaudharycattle.repositories.farm.BuyerRepository;
+import com.chaudhary.chaudharycattle.repositories.farm.SupplierRepository;
 import com.chaudhary.chaudharycattle.repositories.farm.FoodRepository;
 import com.chaudhary.chaudharycattle.repositories.farm.FoodUsageRepository;
 import com.chaudhary.chaudharycattle.service.farm.FoodUsageService;
@@ -30,14 +30,14 @@ public class FoodUsageServiceImpl implements FoodUsageService {
     @Autowired
     private FoodUsageRepository foodUsageRepository;
     @Autowired
-    private BuyerRepository buyerRepository;
+    private SupplierRepository supplierRepository;
     @Override
     public List<Food> getFoodList() {
         return foodRepository.findAll();
     }
     @Override
-    public List<Buyer> getBuyerList() {
-        return buyerRepository.findAll();
+    public List<Supplier> getBuyerList() {
+        return supplierRepository.findAll();
     }
     @Override
     public String getFoodUnit(String name) {

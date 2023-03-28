@@ -40,7 +40,7 @@ public class ChaudharycattleApplication extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/fxmls/images/chaudhary_logo.png")));
 		primaryStage.getIcons().add(icon);
-//		primaryStage.setResizable(false);
+		primaryStage.setResizable(false);
 		primaryStage.centerOnScreen();
 		primaryStage.setScene(new Scene(parent, 800, 600));
 		primaryStage.setTitle(TITTLE);

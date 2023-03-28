@@ -11,7 +11,7 @@ import javax.persistence.Id;
 @Data
 @NoArgsConstructor
 @Entity
-public class Buyer {
+public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bid;
@@ -19,7 +19,7 @@ public class Buyer {
     private String contact;
     private Double amount;
 
-    public Buyer(String name, String contact, Double amount) {
+    public Supplier(String name, String contact, Double amount) {
         this.name = name;
         this.contact = contact;
         this.amount = amount;

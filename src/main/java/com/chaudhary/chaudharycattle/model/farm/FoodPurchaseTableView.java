@@ -1,9 +1,6 @@
 package com.chaudhary.chaudharycattle.model.farm;
 
-import com.chaudhary.chaudharycattle.entities.farm.Buyer;
-import com.chaudhary.chaudharycattle.entities.farm.BuyerLedger;
-import com.chaudhary.chaudharycattle.entities.farm.Food;
-import com.chaudhary.chaudharycattle.entities.farm.FoodPurchase;
+import com.chaudhary.chaudharycattle.entities.farm.SupplierLedger;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,12 +18,12 @@ public class FoodPurchaseTableView {
     private Double amount;
     private LocalDate date;
 
-    public FoodPurchaseTableView(BuyerLedger buyerLedger) {
-        this.food = buyerLedger.getFId().getName();
-        this.buyer = buyerLedger.getBId().getName();
-        this.rate = buyerLedger.getRate();
-        this.qty = buyerLedger.getQty();
-        this.amount = buyerLedger.getAmount();
-        this.date = buyerLedger.getCreatedDate();
+    public FoodPurchaseTableView(SupplierLedger supplierLedger) {
+        this.food = supplierLedger.getFId().getName();
+        this.buyer = supplierLedger.getBId().getName();
+        this.rate = supplierLedger.getRate();
+        this.qty = supplierLedger.getQty();
+        this.amount = supplierLedger.getAmount();
+        this.date = supplierLedger.getCreatedDate();
     }
 }
