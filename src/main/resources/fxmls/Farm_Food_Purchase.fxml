@@ -53,12 +53,12 @@
          <children>
             <AnchorPane layoutY="468.0" prefHeight="450.0" prefWidth="1620.0" style="-fx-background-color: #209FCB;">
                <children>
-                   <Button fx:id="addFood" layoutX="31.0" layoutY="17.0" mnemonicParsing="false" onAction="#addNewFoodPrompt" prefHeight="42.0" prefWidth="170.0" style="-fx-background-color: #209FCB; -fx-background-radius: 15; -fx-border-color: #FFFFFF; -fx-border-radius: 15;" text="Add New Food" textFill="WHITE">
+                   <Button fx:id="addFood" layoutX="31.0" layoutY="17.0" mnemonicParsing="false" onAction="#addNewFoodPrompt" prefHeight="42.0" prefWidth="179.0" style="-fx-background-color: #209FCB; -fx-background-radius: 15; -fx-border-color: #FFFFFF; -fx-border-radius: 15;" text="Add New Food" textFill="WHITE">
                        <font>
                            <Font size="19.0" />
                        </font>
                    </Button>
-                  <Button fx:id="addBuyer" layoutX="31.0" layoutY="68.0" mnemonicParsing="false" onAction="#addNewBuyerPrompt" prefHeight="42.0" prefWidth="170.0" style="-fx-background-color: #209FCB; -fx-background-radius: 15; -fx-border-color: #FFFFFF; -fx-border-radius: 15;" text="Add New Buyer" textFill="WHITE">
+                  <Button fx:id="addBuyer" layoutX="31.0" layoutY="68.0" mnemonicParsing="false" onAction="#addNewBuyerPrompt" prefHeight="42.0" prefWidth="177.0" style="-fx-background-color: #209FCB; -fx-background-radius: 15; -fx-border-color: #FFFFFF; -fx-border-radius: 15;" text="Add New Supplier" textFill="WHITE">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -160,7 +160,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <TextField fx:id="buyerAdd" alignment="CENTER" layoutX="234.0" layoutY="68.0" promptText="BUYER NAME" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" visible="false">
+                  <TextField fx:id="buyerAdd" alignment="CENTER" layoutX="234.0" layoutY="68.0" promptText="SUPPLIER NAME" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" visible="false">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -170,7 +170,7 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="saveNewBuyer" layoutX="803.0" layoutY="68.0" mnemonicParsing="false" onAction="#addNewBuyer" prefHeight="42.0" prefWidth="172.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save Buyer" textFill="#209fcb" visible="false">
+                  <Button fx:id="saveNewBuyer" layoutX="803.0" layoutY="68.0" mnemonicParsing="false" onAction="#addNewBuyer" prefHeight="42.0" prefWidth="172.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save Supplier" textFill="#209fcb" visible="false">
                      <font>
                         <Font size="19.0" />
                      </font>

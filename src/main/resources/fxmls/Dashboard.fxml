@@ -146,5 +146,15 @@
             </Label>
          </children>
       </AnchorPane>
+      <Label layoutX="391.0" layoutY="893.0" text="Total :-" textAlignment="CENTER" textFill="#209fcb">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="totalRepay" alignment="CENTER" layoutX="468.0" layoutY="894.0" prefHeight="29.0" prefWidth="251.0" text="0" textAlignment="CENTER" textFill="#209fcb">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -8,6 +8,7 @@ import java.util.Map;
 public interface DashboardService {
     List<DashboardTableView> getStockTable ();
     List<DashboardTableView> getSupplierTable();
+    Double getTotalRemPayAmount();
     Double getTotalMilkCountByCode (String code, Shift Shift);
     Map<String, String> getProfitRecord ();
 }

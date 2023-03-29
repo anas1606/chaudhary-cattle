@@ -185,12 +185,12 @@ public class FoodPurchaseController implements Initializable {
         }
     }
     public void addNewBuyerPrompt (){
-        if(addBuyer.getText().equalsIgnoreCase("Add New Buyer")) {
+        if(addBuyer.getText().equalsIgnoreCase("Add New Supplier")) {
             setAddNewBuyerVisible(true);
             setAddNewProductVisible(false);
             save.setVisible(false);
             buyerAdd.requestFocus();
-            addBuyer.setText("Close Add Buyer");
+            addBuyer.setText("Close New Supplier");
         }else{
             setAddNewBuyerVisible(false);
             save.setVisible(true);
@@ -238,7 +238,7 @@ public class FoodPurchaseController implements Initializable {
         buyerAdd.setVisible(val);
         contactAdd.setVisible(val);
         saveNewBuyer.setVisible(val);
-        addBuyer.setText("Add New Buyer");
+        addBuyer.setText("Add New Supplier");
     }
     private boolean validateAddNewFood (){
         return (!foodAdd.getText().equalsIgnoreCase("") && foodAdd.getText() != null && !unitAdd.getText().equalsIgnoreCase("") && unitAdd.getText() != null);

@@ -27,7 +27,7 @@ public class DashboardController implements Initializable {
     @FXML
     private TableColumn<DashboardTableView, String> foodName,foodStock,supplierAmount,supplierName;
     @FXML
-    private Label D0599, E0599, D0868, E0868, totalMilkIncome, totalFoodExp, totalOtherExp, profit;
+    private Label D0599, E0599, D0868, E0868, totalMilkIncome, totalFoodExp, totalOtherExp, profit, totalRepay;
     @Autowired
     private DashboardService dashboardService;
     @Override
@@ -57,6 +57,7 @@ public class DashboardController implements Initializable {
                 dashboardService.getSupplierTable()
         );
         supplierTable.setItems(data);
+        totalRepay.setText(dashboardService.getTotalRemPayAmount().toString());
     }
     private void renderMilkRecord (){
         D0599.setText(dashboardService.getTotalMilkCountByCode("0599", Shift.MORNING).toString());

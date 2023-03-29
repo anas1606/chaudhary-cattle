@@ -87,8 +87,7 @@ public class FoodUsageServiceImpl implements FoodUsageService {
                     }
                 }
                 return true;
-            } else
-                return false;
+            }
         }
         return false;
     }

@@ -48,4 +48,9 @@ public class DashboardServiceImpl implements DashboardService {
         map.put("foodExp",foodUsageRepository.sumOfAmountByCreatedDateBetween(startDate,endDate).toString());
         return map;
     }
+
+    @Override
+    public Double getTotalRemPayAmount() {
+        return supplierRepository.sumOfAmount();
+    }
 }
