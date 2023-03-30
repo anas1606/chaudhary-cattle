@@ -58,7 +58,7 @@ public class FoodUsageServiceImpl implements FoodUsageService {
 
     @Transactional
     @Override
-    public boolean submit(String name, Double qty, String shift) {
+    public boolean submit(String name, Double qty, String shift, LocalDate date) {
         Food food = foodRepository.findByName(name);
         if (food != null) {
             if (foodRepository.findQtyByName(name) >= qty) {
@@ -73,12 +73,12 @@ public class FoodUsageServiceImpl implements FoodUsageService {
                         foodPurchase.setRQty(foodPurchase.getRQty() - tQty);
                         foodPurchaseRepository.save(foodPurchase);
 
-                        FoodUsage foodUsage = new FoodUsage(food, LocalDate.now(), tQty, Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()*tQty);
+                        FoodUsage foodUsage = new FoodUsage(food, date, tQty, Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()*tQty);
                         foodUsageRepository.save(foodUsage);
                         break;
                     } else {
 
-                        FoodUsage foodUsage = new FoodUsage(food, LocalDate.now(), foodPurchase.getRQty(), Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()* foodPurchase.getRQty());
+                        FoodUsage foodUsage = new FoodUsage(food, date, foodPurchase.getRQty(), Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()* foodPurchase.getRQty());
                         foodUsageRepository.save(foodUsage);
 
                         tQty = tQty - foodPurchase.getRQty();
@@ -101,20 +101,17 @@ public class FoodUsageServiceImpl implements FoodUsageService {
 
     @Override
     public int getTableDataCount() {
-        LocalDate sdate = LocalDate.now();
         Integer count = foodUsageRepository.countOfIdByCreatedDateBetween(startDate, endDate);
         return count != null ? count : 0;
     }
 
     @Override
     public FoodUsageRecordModel foodUsageRecord() {
-        LocalDate sdate = LocalDate.now().minusDays(50);
-        LocalDate edate = LocalDate.now().plusMonths(1);
         FoodUsageRecordModel model = new FoodUsageRecordModel();
-        Double tail = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate, edate, foodRepository.findByName("TAIL").getId());
-        Double gool = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate, edate, foodRepository.findByName("GOOL").getId());
-        Double chhar = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate, edate, foodRepository.findByName("CHHAR").getId());
-        Double bear = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(sdate, edate, foodRepository.findByName("BEAR").getId());
+        Double tail = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(startDate, endDate, foodRepository.findByName("TAIL").getId());
+        Double gool = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(startDate, endDate, foodRepository.findByName("GOOL").getId());
+        Double chhar = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(startDate, endDate, foodRepository.findByName("CHHAR").getId());
+        Double bear = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(startDate, endDate, foodRepository.findByName("BEAR").getId());
         model.setTail(tail != null ? tail : 0.0);
         model.setGool(gool != null ? gool : 0.0);
         model.setChhar(chhar != null ? chhar : 0.0);

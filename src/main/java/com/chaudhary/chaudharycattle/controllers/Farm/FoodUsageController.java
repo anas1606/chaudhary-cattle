@@ -96,7 +96,7 @@ public class FoodUsageController implements Initializable {
             str.append("\nUnit : ").append("KG");
             str.append("\nQty : ").append(qty);
             if((CommanUtils.confirmationAlert("Food Usage Slip ", str.toString())).equalsIgnoreCase("OK") ) {
-                if(foodUsageService.submit(food.getText(), qty, cb.getValue())) {
+                if(foodUsageService.submit(food.getText(), qty, cb.getValue(), datePicker.getValue())) {
                     CommanUtils.informationAlert("Information", "Stock Updated & Data Inserted");
                     renderTotalData();
                     food.clear();

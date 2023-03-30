@@ -13,7 +13,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -40,7 +39,7 @@ public class DashboardController implements Initializable {
         milkRecordRender.start();
         renderProfit();
     }
-    private void renderStockTable (){
+    private void renderStockTable () {
         foodName.setCellValueFactory(new PropertyValueFactory<>("name"));
         foodStock.setCellValueFactory(new PropertyValueFactory<>("amount"));
         //Creating a table view
@@ -49,7 +48,7 @@ public class DashboardController implements Initializable {
         );
         foodTable.setItems(data);
     }
-    private void renderSupplierTable (){
+    private void renderSupplierTable () {
         supplierName.setCellValueFactory(new PropertyValueFactory<>("name"));
         supplierAmount.setCellValueFactory(new PropertyValueFactory<>("amount"));
         //Creating a table view
@@ -59,18 +58,21 @@ public class DashboardController implements Initializable {
         supplierTable.setItems(data);
         totalRepay.setText(dashboardService.getTotalRemPayAmount().toString());
     }
-    private void renderMilkRecord (){
+    private void renderMilkRecord () {
         D0599.setText(dashboardService.getTotalMilkCountByCode("0599", Shift.MORNING).toString());
         E0599.setText(dashboardService.getTotalMilkCountByCode("0599", Shift.EVENING).toString());
         D0868.setText(dashboardService.getTotalMilkCountByCode("0868", Shift.MORNING).toString());
         E0868.setText(dashboardService.getTotalMilkCountByCode("0868", Shift.EVENING).toString());
     }
-    private void renderProfit (){
+    private void renderProfit () {
         Map<String,String> map = dashboardService.getProfitRecord();
         totalMilkIncome.setText(map.get("income"));
         totalFoodExp.setText(map.get("foodExp"));
+        totalOtherExp.setText(map.get("medExp"));
         double income = Double.parseDouble(map.get("income"));
         double foodExp = Double.parseDouble(map.get("foodExp"));
-        profit.setText( String.valueOf(income - (foodExp)) );
+        double medExp = Double.parseDouble(map.get("medExp"));
+        double _profit = income - (foodExp + medExp);
+        profit.setText( String.valueOf(Double.parseDouble(String.format("%.2f", _profit))) );
     }
 }

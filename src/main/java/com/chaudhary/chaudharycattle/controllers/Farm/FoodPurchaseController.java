@@ -158,7 +158,7 @@ public class FoodPurchaseController implements Initializable {
     }
     public void addNewBuyer (){
         if(validateAddNewBuyer() && foodPurchasedService.addNewBuyer(buyerAdd.getText(),contactAdd.getText())){
-            CommanUtils.informationAlert("Information", "New Buyer Inserted");
+            CommanUtils.informationAlert("Information", "New Supplier Inserted");
             buyerList = foodUsageService.getBuyerList().stream().map(Supplier::getName).collect(Collectors.toList());
             TextFields.bindAutoCompletion(buyer,buyerList);
             setAddNewBuyerVisible(false);

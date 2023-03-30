@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -63,7 +64,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="discription" alignment="CENTER" layoutX="63.0" layoutY="175.0" prefHeight="45.0" prefWidth="592.0" promptText="discription" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
+                  <TextField fx:id="description" alignment="CENTER" layoutX="63.0" layoutY="175.0" prefHeight="45.0" prefWidth="718.0" promptText="discription" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -83,8 +84,9 @@
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <DatePicker fx:id="datePicker" layoutX="673.0" layoutY="178.0" prefHeight="40.0" prefWidth="204.0" style="-fx-font-size: 20; -fx-background-color: #FFFFFF;" />
-                  <Button fx:id="save" layoutX="1413.0" layoutY="17.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save" textFill="#209fcb">
+                  <ComboBox fx:id="payment" layoutX="810.0" layoutY="325.0" prefHeight="39.0" prefWidth="227.0" promptText="Payment Mode" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-font-size: 20;" visibleRowCount="2" />
+                  <DatePicker fx:id="datePicker" layoutX="810.0" layoutY="178.0" prefHeight="40.0" prefWidth="204.0" style="-fx-font-size: 20; -fx-background-color: #FFFFFF;" />
+                  <Button fx:id="save" layoutX="1413.0" layoutY="17.0" mnemonicParsing="false" onAction="#submit" onKeyPressed="#submit_key" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="  Save" textFill="#209fcb">
                      <font>
                         <Font size="19.0" />
                      </font>
@@ -123,6 +125,11 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Label layoutX="810.0" layoutY="267.0" text="Payment" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
             <TableView layoutX="8.0" layoutY="6.0" prefHeight="422.0" prefWidth="870.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-font-size: 20;">
               <columns>

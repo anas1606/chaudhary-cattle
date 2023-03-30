@@ -2,14 +2,10 @@ package com.chaudhary.chaudharycattle.service.impl;
 
 import com.chaudhary.chaudharycattle.entities.enums.Shift;
 import com.chaudhary.chaudharycattle.model.DashboardTableView;
-import com.chaudhary.chaudharycattle.repositories.farm.FoodRepository;
-import com.chaudhary.chaudharycattle.repositories.farm.FoodUsageRepository;
-import com.chaudhary.chaudharycattle.repositories.farm.MilkRepository;
-import com.chaudhary.chaudharycattle.repositories.farm.SupplierRepository;
+import com.chaudhary.chaudharycattle.repositories.farm.*;
 import com.chaudhary.chaudharycattle.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,6 +23,8 @@ public class DashboardServiceImpl implements DashboardService {
     private MilkRepository milkRepository;
     @Autowired
     private FoodUsageRepository foodUsageRepository;
+    @Autowired
+    private MedicalRepository medicalRepository;
     private static final LocalDate startDate = LocalDate.now().withDayOfMonth(1);
     private static final LocalDate endDate = startDate.plusMonths(1).minusDays(1);
     @Override
@@ -46,6 +44,7 @@ public class DashboardServiceImpl implements DashboardService {
         Map<String,String> map = new HashMap<>();
         map.put("income",milkRepository.sumOfAmountByCreatedDateBetween(startDate,endDate).toString());
         map.put("foodExp",foodUsageRepository.sumOfAmountByCreatedDateBetween(startDate,endDate).toString());
+        map.put("medExp",medicalRepository.sumOfAmountByCreatedDateBetween(startDate,endDate).toString());
         return map;
     }
 
