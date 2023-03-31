@@ -16,8 +16,8 @@ spring:
       dialect: org.hibernate.dialect.SQLServer2012Dialect
       ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  server:
-    port: 9090
+server:
+  port: 9090
 
 
 const:
