@@ -54,7 +54,7 @@
             </Button>
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="75.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/user.png" />
+                  <Image url="@icons/userInfo.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="75.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">

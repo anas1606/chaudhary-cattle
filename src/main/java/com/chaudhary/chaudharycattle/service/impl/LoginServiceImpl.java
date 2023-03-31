@@ -1,6 +1,6 @@
 package com.chaudhary.chaudharycattle.service.impl;
 
-import com.chaudhary.chaudharycattle.entities.User;
+import com.chaudhary.chaudharycattle.entities.UserInfo;
 import com.chaudhary.chaudharycattle.repositories.UserRepository;
 import com.chaudhary.chaudharycattle.service.LoginService;
 import com.chaudhary.chaudharycattle.utils.CommanUtils;
@@ -15,15 +15,15 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean login(String userName, String password) {
-        User user = userRepository.findByUsername(userName);
-        return user != null && CommanUtils.checkPassword(password, user.getPassword());
+        UserInfo userInfo = userRepository.findByUsername(userName);
+        return userInfo != null && CommanUtils.checkPassword(password, userInfo.getPassword());
     }
 
     @Override
     public void init() {
-        User user = userRepository.findByUsername("Admin");
-        if(user == null) {
-            userRepository.save(new User("Admin",CommanUtils.hashPassword("Admin")));
+        UserInfo userInfo = userRepository.findByUsername("Admin");
+        if(userInfo == null) {
+            userRepository.save(new UserInfo("Admin",CommanUtils.hashPassword("Admin")));
         }
     }
 }

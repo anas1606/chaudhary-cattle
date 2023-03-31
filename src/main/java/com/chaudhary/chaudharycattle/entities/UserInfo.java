@@ -9,17 +9,17 @@ import javax.persistence.Id;
 
 @Data
 @Entity
-public class User {
+public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uid;
     private String username;
     private String password;
 
-    public User() {
+    public UserInfo() {
     }
 
-    public User(String username, String password) {
+    public UserInfo(String username, String password) {
         this.username = username;
         this.password = password;
     }
