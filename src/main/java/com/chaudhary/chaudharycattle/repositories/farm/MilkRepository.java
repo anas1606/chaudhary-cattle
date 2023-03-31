@@ -22,4 +22,6 @@ public interface MilkRepository extends JpaRepository<Milk, Long> {
     MilkRecordModel milkRecord (LocalDate startDate, LocalDate endDate, List<String> codes);
     @Query(value = "SELECT IFNULL(ROUND(SUM(amount),2),0.0) FROM Milk WHERE createdDate BETWEEN ?1 AND ?2",nativeQuery = true)
     Double sumOfAmountByCreatedDateBetween (LocalDate startDate, LocalDate endDate);
+    @Query(value = "SELECT IFNULL(ROUND(SUM(amount),2),0.0) FROM Milk WHERE 1=1",nativeQuery = true)
+    Double sumOfAmount ();
 }

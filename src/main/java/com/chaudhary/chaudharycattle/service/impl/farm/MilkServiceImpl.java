@@ -23,7 +23,8 @@ public class MilkServiceImpl implements MilkService {
 
     @Autowired
     private MilkRepository milkRepository;
-
+    private static final LocalDate startDate = LocalDate.now().withDayOfMonth(1);
+    private static final LocalDate endDate = startDate.plusMonths(1).minusDays(1);
     @Transactional
     @Override
     public void saveData(String shift, LocalDate date, Double liters, Double fat, Double rate, Double amount, String code) {
@@ -32,33 +33,30 @@ public class MilkServiceImpl implements MilkService {
 
     @Override
     public List<MilkTableView> getTableData(int pageNo, int maxSize) {
-        LocalDate sdate = LocalDate.now();
         Pageable page = PageRequest.of(pageNo,maxSize, Sort.Direction.DESC, "createdDate");
-        List<Milk> data = milkRepository.findAllByCreatedDateBetween(sdate.minusDays(50), sdate.plusMonths(1), page).toList();
+        List<Milk> data = milkRepository.findAllByCreatedDateBetween(startDate, endDate, page).toList();
         return data.stream().map(MilkTableView::new).collect(Collectors.toList());
     }
 
     @Override
     public int getTableDataCount() {
-        LocalDate sdate = LocalDate.now();
-        Integer count =  milkRepository.countOfIdByCreatedDateBetween(sdate.minusDays(50), sdate.plusMonths(1));
+        Integer count =  milkRepository.countOfIdByCreatedDateBetween(startDate, endDate);
         return count != null ? count : 0;
     }
 
     @Override
     public Double totalLitersOfMilkByShift(Shift shift, String code) {
-        Double val;
         if(code.equalsIgnoreCase("0"))
-            return milkRepository.sumOfLitersByCreatedDateBetweenAndShiftAndCode(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), shift.name(), Arrays.asList("0599","0868"));
+            return milkRepository.sumOfLitersByCreatedDateBetweenAndShiftAndCode(startDate,endDate, shift.name(), Arrays.asList("0599","0868"));
         else
-            return milkRepository.sumOfLitersByCreatedDateBetweenAndShiftAndCode(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), shift.name(),Collections.singletonList(code));
+            return milkRepository.sumOfLitersByCreatedDateBetweenAndShiftAndCode(startDate,endDate, shift.name(),Collections.singletonList(code));
     }
 
     @Override
     public MilkRecordModel milkRecord(String code) {
         if(code.equalsIgnoreCase("0"))
-            return milkRepository.milkRecord(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), Arrays.asList("0599","0868"));
+            return milkRepository.milkRecord(startDate, endDate, Arrays.asList("0599","0868"));
         else
-            return milkRepository.milkRecord(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), Collections.singletonList(code));
+            return milkRepository.milkRecord(startDate, endDate, Collections.singletonList(code));
     }
 }

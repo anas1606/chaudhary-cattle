@@ -23,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
     public void init() {
         User user = userRepository.findByUsername("Admin");
         if(user == null) {
-            userRepository.save(new User("Admin",CommanUtils.hashPassword("Admin@1122")));
+            userRepository.save(new User("Admin",CommanUtils.hashPassword("Admin")));
         }
     }
 }

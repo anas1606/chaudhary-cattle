@@ -11,4 +11,5 @@ public interface DashboardService {
     Double getTotalRemPayAmount();
     Double getTotalMilkCountByCode (String code, Shift Shift);
     Map<String, String> getProfitRecord ();
+    Double getCashBalance ();
 }

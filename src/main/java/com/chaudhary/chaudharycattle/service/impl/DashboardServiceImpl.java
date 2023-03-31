@@ -1,5 +1,6 @@
 package com.chaudhary.chaudharycattle.service.impl;
 
+import com.chaudhary.chaudharycattle.entities.enums.PaymentMode;
 import com.chaudhary.chaudharycattle.entities.enums.Shift;
 import com.chaudhary.chaudharycattle.model.DashboardTableView;
 import com.chaudhary.chaudharycattle.repositories.farm.*;
@@ -51,5 +52,12 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public Double getTotalRemPayAmount() {
         return supplierRepository.sumOfAmount();
+    }
+
+    @Override
+    public Double getCashBalance() {
+        Double income = milkRepository.sumOfAmount();
+        Double medicalCashPayment = medicalRepository.sumOfAmountByPymentMode(PaymentMode.CASH);
+        return income - (medicalCashPayment);
     }
 }

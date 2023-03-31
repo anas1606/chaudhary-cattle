@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bid;
+    private int bId;
     private String name;
     private String contact;
     private Double amount;

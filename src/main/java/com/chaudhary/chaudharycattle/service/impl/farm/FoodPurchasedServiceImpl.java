@@ -31,7 +31,8 @@ public class FoodPurchasedServiceImpl implements FoodPurchasedService {
     private FoodPurchaseRepository foodPurchaseRepository;
     @Autowired
     private SupplierLedgerRepository supplierLedgerRepository;
-
+    private static final LocalDate startDate = LocalDate.now().withDayOfMonth(1);
+    private static final LocalDate endDate = startDate.plusMonths(1).minusDays(1);
     @Transactional
     @Override
     public boolean submit(String foodName, String buyerName, Double rate, Double qty, Double amount, LocalDate date) {
@@ -70,12 +71,12 @@ public class FoodPurchasedServiceImpl implements FoodPurchasedService {
     @Override
     public List<FoodPurchaseTableView> getTableData(int pageNo, int maxSize) {
         Pageable page = PageRequest.of(pageNo,maxSize, Sort.Direction.DESC, "createdDate");
-        List<SupplierLedger> foodPurchases = supplierLedgerRepository.findAllByCreatedDateBetween(LocalDate.now().minusDays(50),LocalDate.now().plusMonths(1), page).toList();
+        List<SupplierLedger> foodPurchases = supplierLedgerRepository.findAllByCreatedDateBetween(startDate,endDate, page).toList();
         return foodPurchases.stream().map(FoodPurchaseTableView::new).collect(Collectors.toList());
     }
     @Override
     public int getTableDataCount() {
-        Integer count =  supplierLedgerRepository.countOfIdByCreatedDateBetween(LocalDate.now().minusDays(50), LocalDate.now().plusMonths(1));
+        Integer count =  supplierLedgerRepository.countOfIdByCreatedDateBetween(startDate, endDate);
         return count != null ? count : 0;
     }
 }

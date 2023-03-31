@@ -17,13 +17,7 @@ public class LandingController implements Initializable {
     @FXML
     private BorderPane bp;
     @FXML
-    private Button logout;
-
-    @FXML
-    private Button dashboard;
-
-    @FXML
-    private Button farm;
+    private Button logout, dashboard, farm, supplier;
 
     public void logOut (){
         CommanUtils.switchToScene(FxmlPaths.LOGIN, logout, 800, 600);
@@ -35,8 +29,8 @@ public class LandingController implements Initializable {
     public void openFarm(){
         CommanUtils.loadPage(FxmlPaths.FARM_MILK);
     }
-
-
+    public void openSupplier(){
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CommanUtils.setLandingBorderPane(bp);

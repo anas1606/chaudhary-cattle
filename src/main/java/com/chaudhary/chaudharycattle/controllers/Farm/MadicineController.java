@@ -1,6 +1,8 @@
 package com.chaudhary.chaudharycattle.controllers.Farm;
 
 import com.chaudhary.chaudharycattle.entities.farm.Supplier;
+import com.chaudhary.chaudharycattle.model.DashboardTableView;
+import com.chaudhary.chaudharycattle.model.farm.MedicalTableView;
 import com.chaudhary.chaudharycattle.service.farm.FoodPurchasedService;
 import com.chaudhary.chaudharycattle.service.farm.FoodUsageService;
 import com.chaudhary.chaudharycattle.service.farm.MedicalService;
@@ -11,10 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import org.controlsfx.control.textfield.TextFields;
@@ -38,6 +38,15 @@ public class MadicineController implements Initializable {
     private ComboBox<String> payment;
     @FXML
     private DatePicker datePicker;
+    @FXML
+    private TableColumn<MedicalTableView, String> discCol, amountCol , supplierCol, dateCol, paymentModeCol;
+    @FXML
+    private TableView<MedicalTableView> table = new TableView<>();
+    @FXML
+    private TableView<DashboardTableView> recTable = new TableView<>();
+    @FXML
+    private TableColumn<DashboardTableView, String>  amountColRec, supplierColRec;
+    private Label pagination;
     @Autowired
     private FoodPurchasedService foodPurchasedService;
     @Autowired
@@ -45,6 +54,11 @@ public class MadicineController implements Initializable {
     @Autowired
     private MedicalService medicalService;
     private static List<String> supplierList;
+    private static int pageNo = 0;
+    private static final int maxSize = 10;
+    private static int from = 1;
+    private static int to = maxSize;
+    private static long totalRecord = 0;
     public void loadMilk(){
         CommanUtils.loadPage(FxmlPaths.FARM_MILK);
     }
@@ -56,6 +70,10 @@ public class MadicineController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        Thread dataTable = new Thread(this::renderDataTable);
+        dataTable.start();
+        Thread recDataTable = new Thread(this::renderRecDataTable);
+        recDataTable.start();
         supplierList = foodUsageService.getBuyerList().stream().map(Supplier::getName).collect(Collectors.toList());
         TextFields.bindAutoCompletion(supplier,supplierList);
         ObservableList<String> options = FXCollections.observableArrayList("CASH","PAYLATER");
@@ -112,6 +130,45 @@ public class MadicineController implements Initializable {
             supplierAdd.clear();
             contactAdd.clear();
             supplierAdd.requestFocus();
+        }
+    }
+    private void renderDataTable (){
+        discCol.setCellValueFactory(new PropertyValueFactory<>("description"));
+        amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        supplierCol.setCellValueFactory(new PropertyValueFactory<>("supplier"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        paymentModeCol.setCellValueFactory(new PropertyValueFactory<>("paymentMode"));
+        //Creating a table view
+        final ObservableList<MedicalTableView> data = FXCollections.observableArrayList(
+                medicalService.getTableData(pageNo, maxSize)
+        );
+        totalRecord = medicalService.getTableDataCount();
+        table.setItems(data);
+        pagination.setText(""+(from)+" - "+(Math.min(to,totalRecord))+" / "+totalRecord);
+    }
+    private void renderRecDataTable (){
+        supplierColRec.setCellValueFactory(new PropertyValueFactory<>("name"));
+        amountColRec.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        //Creating a table view
+        final ObservableList<DashboardTableView> data = FXCollections.observableArrayList(
+                medicalService.getRecTableData()
+        );
+        recTable.setItems(data);
+    }
+    public void nextPage (){
+        if(totalRecord > (long) (pageNo + 1) *maxSize) {
+            pageNo++;
+            from = to + 1;
+            to = to + maxSize;
+            renderDataTable();
+        }
+    }
+    public void prevPage (){
+        if(pageNo > 0) {
+            pageNo--;
+            from = from - maxSize;
+            to = to - maxSize;
+            renderDataTable();
         }
     }
     private void setAddNewSupplierVisible (boolean val){

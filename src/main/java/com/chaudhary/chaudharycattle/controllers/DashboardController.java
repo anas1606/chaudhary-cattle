@@ -26,7 +26,7 @@ public class DashboardController implements Initializable {
     @FXML
     private TableColumn<DashboardTableView, String> foodName,foodStock,supplierAmount,supplierName;
     @FXML
-    private Label D0599, E0599, D0868, E0868, totalMilkIncome, totalFoodExp, totalOtherExp, profit, totalRepay;
+    private Label D0599, E0599, D0868, E0868, totalMilkIncome, totalFoodExp, totalOtherExp, profit, totalRepay, cash;
     @Autowired
     private DashboardService dashboardService;
     @Override
@@ -38,6 +38,7 @@ public class DashboardController implements Initializable {
         Thread milkRecordRender = new Thread(this::renderMilkRecord);
         milkRecordRender.start();
         renderProfit();
+        renderCashBalance();
     }
     private void renderStockTable () {
         foodName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -74,5 +75,9 @@ public class DashboardController implements Initializable {
         double medExp = Double.parseDouble(map.get("medExp"));
         double _profit = income - (foodExp + medExp);
         profit.setText( String.valueOf(Double.parseDouble(String.format("%.2f", _profit))) );
+    }
+
+    private void renderCashBalance () {
+        cash.setText(dashboardService.getCashBalance().toString());
     }
 }

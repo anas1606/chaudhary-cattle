@@ -47,7 +47,7 @@
                   <Image url="@icons/cow.png" />
                </image>
             </ImageView>
-            <Button fx:id="logout" layoutX="87.0" layoutY="792.0" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: transparent;" text="Log Out" textFill="WHITE">
+            <Button fx:id="logout" layoutX="87.0" layoutY="842.0" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: transparent;" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
@@ -55,9 +55,22 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="66.0" layoutY="800.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="66.0" layoutY="850.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/logout.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="supplier" layoutX="53.0" layoutY="325.0" mnemonicParsing="false" onAction="#openSupplier" style="-fx-background-color: transparent;" text="Supplier" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="21.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/supplier.png" />
                </image>
             </ImageView>
          </children>

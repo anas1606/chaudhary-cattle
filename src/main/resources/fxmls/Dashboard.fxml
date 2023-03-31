@@ -104,22 +104,22 @@
       </Label>
       <AnchorPane layoutX="900.0" layoutY="483.0" prefHeight="404.0" prefWidth="376.0" style="-fx-background-color: #209FCB; -fx-background-radius: 50;">
          <children>
-            <Label layoutX="100.0" layoutY="28.0" text="Total Milk Income" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="100.0" layoutY="28.0" text="Total Milk Income" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="100.0" layoutY="118.0" text="Total Food Expense" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="100.0" layoutY="118.0" text="Total Food Expense" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="100.0" layoutY="208.0" text="Total Other Expense" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="100.0" layoutY="208.0" text="Total Other Expense" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="148.0" layoutY="294.0" text="Profit" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="148.0" layoutY="294.0" text="Profit" textAlignment="CENTER" textFill="#69dd7e">
                <font>
                   <Font size="36.0" />
                </font>
@@ -156,5 +156,29 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <AnchorPane layoutX="1296.0" layoutY="484.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #209FCB; -fx-background-radius: 50;">
+         <children>
+            <Label layoutX="53.0" layoutY="66.0" text="Cash" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="cash" alignment="CENTER" layoutY="142.0" prefHeight="50.0" prefWidth="300.0" text="0" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="111.0" layoutY="14.0" text="Total" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="140.0" layoutY="66.0" text="Balance" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

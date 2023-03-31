@@ -131,21 +131,38 @@
                      </font>
                   </Label>
                </children></AnchorPane>
-            <TableView layoutX="8.0" layoutY="6.0" prefHeight="422.0" prefWidth="870.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-font-size: 20;">
+            <TableView fx:id="table" layoutX="8.0" layoutY="6.0" prefHeight="422.0" prefWidth="870.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-font-size: 20;">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="discCol" prefWidth="75.0" text="Description" />
+                <TableColumn fx:id="amountCol" prefWidth="75.0" text="Amount" />
+                  <TableColumn fx:id="supplierCol" prefWidth="75.0" text="Supplier" />
+                  <TableColumn fx:id="dateCol" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="paymentModeCol" prefWidth="75.0" text="Payment Mode" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Label layoutX="435.0" layoutY="436.0" text="1 - 10 / 0" textFill="#209fcb">
+            <Label fx:id="pagination" layoutX="435.0" layoutY="436.0" text="1 - 10 / 0" textFill="#209fcb">
                <font>
                   <Font size="16.0" />
                </font></Label>
-            <Button layoutX="819.0" layoutY="436.0" mnemonicParsing="false" style="-fx-background-color: #209FCB;" text="&lt;" textFill="WHITE" />
-            <Button layoutX="854.0" layoutY="436.0" mnemonicParsing="false" style="-fx-background-color: #209FCB;" text="&gt;" textFill="WHITE" />
+            <Button layoutX="819.0" layoutY="436.0" mnemonicParsing="false" onAction="#prevPage" style="-fx-background-color: #209FCB;" text="&lt;" textFill="WHITE" />
+            <Button layoutX="854.0" layoutY="436.0" mnemonicParsing="false" onAction="#nextPage" style="-fx-background-color: #209FCB;" text="&gt;" textFill="WHITE" />
+            <Label layoutX="1135.0" layoutY="6.0" text="Present Month Medical Expense" textFill="#209fcb">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TableView fx:id="recTable" layoutX="1038.0" layoutY="36.0" prefHeight="422.0" prefWidth="455.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-font-size: 20;">
+               <columns>
+                  <TableColumn fx:id="supplierColRec" prefWidth="75.0" text="Supplier" />
+                  <TableColumn fx:id="amountColRec" prefWidth="75.0" text="Amount" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
          </children></AnchorPane>
     </center>
 </BorderPane>
