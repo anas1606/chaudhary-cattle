@@ -13,22 +13,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chaudhary.chaudharycattle.controllers.LoginController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="266.0" style="-fx-background-color: #209FCB;">
+      <Pane prefHeight="400.0" prefWidth="303.0" style="-fx-background-color: #209FCB;">
          <children>
-            <ImageView fitHeight="274.0" fitWidth="272.0" layoutX="-6.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="309.0" fitWidth="340.0" layoutX="-6.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/milk.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="225.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="225.0" layoutX="68.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/chaudhary_slog.png" />
                </image>
             </ImageView>
          </children></Pane>
-      <Pane layoutX="272.0" layoutY="2.0" prefHeight="400.0" prefWidth="329.0">
+      <Pane layoutX="305.0" layoutY="2.0" prefHeight="400.0" prefWidth="296.0">
          <children>
-            <ImageView fitHeight="103.0" fitWidth="126.0" layoutX="91.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="103.0" fitWidth="126.0" layoutX="85.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/chaudhary_logo.png" />
                </image>
@@ -43,7 +43,7 @@
                   <Font size="14.0" />
                </font>
             </PasswordField>
-            <Label layoutX="179.0" layoutY="378.0" text="Powerd By: Quba Infotech" textFill="#209fcb" />
+            <Label layoutX="151.0" layoutY="381.0" text="Powerd By: Quba Infotech" textFill="#209fcb" />
             <Button fx:id="signin" layoutX="72.0" layoutY="281.0" mnemonicParsing="false" onAction="#signIn" onKeyPressed="#signIn_Key" prefHeight="32.0" prefWidth="171.0" style="-fx-background-color: #209FCB; -fx-background-radius: 20;" text="Sign In" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
