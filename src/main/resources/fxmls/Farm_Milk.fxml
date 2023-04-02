@@ -16,22 +16,14 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1110.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chaudhary.chaudharycattle.controllers.Farm.MilkController">
    <top>
-      <AnchorPane prefHeight="65.0" prefWidth="700.0" style="-fx-background-color: #209FCB;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="55.0" prefWidth="700.0" style="-fx-background-color: #209FCB;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="50.0" layoutY="12.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="Milk" textFill="#209fcb">
+            <Button layoutX="50.0" layoutY="9.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="Milk" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="246.0" layoutY="12.0" mnemonicParsing="false" onAction="#loadFoodUsage" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Usage" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="445.0" layoutY="12.0" mnemonicParsing="false" onAction="#loadMadicine" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text="Madicine" textFill="WHITE">
+            <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadFoodUsage" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Usage" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -39,7 +31,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="653.0" layoutY="12.0" mnemonicParsing="false" onAction="#loadFoodPurchase" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Purchase" textFill="WHITE">
+            <Button layoutX="445.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadMadicine" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text="Madicine" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="653.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadFoodPurchase" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Purchase" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -52,17 +52,17 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="747.0" layoutY="4.0" text="Present Month Record For - " textFill="#209fcb">
+            <Label layoutX="747.0" layoutY="14.0" text="Present Month Record For - " textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TableView fx:id="table" layoutX="5.0" layoutY="2.0" prefHeight="329.0" prefWidth="686.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-font-size: 16;">
+            <TableView fx:id="table" layoutX="5.0" layoutY="5.0" prefHeight="336.0" prefWidth="686.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-font-size: 16;">
               <columns>
                 <TableColumn fx:id="shift" text="Shift" />
                   <TableColumn fx:id="date" prefWidth="133.0" text="Date" />
-                  <TableColumn fx:id="liters" prefWidth="97.0" text="Liters" />
-                  <TableColumn fx:id="fats" prefWidth="70.0" text="Fat" />
+                  <TableColumn fx:id="liters" prefWidth="114.0" text="Liters" />
+                  <TableColumn fx:id="fats" prefWidth="116.0" text="Fat" />
                   <TableColumn fx:id="rates" minWidth="0.0" prefWidth="150.0" text="Rate" />
                   <TableColumn fx:id="amounts" prefWidth="159.0" text="Amount" />
               </columns>
@@ -70,7 +70,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <AnchorPane layoutY="350.0" prefHeight="287.0" prefWidth="1110.0" style="-fx-background-color: #209FCB;">
+            <AnchorPane layoutY="360.0" prefHeight="287.0" prefWidth="1110.0" style="-fx-background-color: #209FCB;">
                <children>
                   <TextField fx:id="code" alignment="CENTER" layoutX="50.0" layoutY="22.0" prefWidth="140.0" promptText="Code" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;">
                      <font>
@@ -180,72 +180,72 @@
                   </Label>
                </children>
             </AnchorPane>
-            <Label layoutX="748.0" layoutY="54.0" text="MORNING" textFill="#209fcb">
+            <Label layoutX="748.0" layoutY="74.0" text="MORNING" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="962.0" layoutY="54.0" text="EVENING" textFill="#209fcb">
+            <Label layoutX="962.0" layoutY="74.0" text="EVENING" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="morning" alignment="CENTER" editable="false" layoutX="701.0" layoutY="84.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+            <TextField fx:id="morning" alignment="CENTER" editable="false" layoutX="701.0" layoutY="104.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="evening" alignment="CENTER" editable="false" layoutX="911.0" layoutY="84.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-border-radius: 15;">
+            <TextField fx:id="evening" alignment="CENTER" editable="false" layoutX="911.0" layoutY="104.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 2px; -fx-border-radius: 15;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="781.0" layoutY="146.0" text="FAT" textFill="#209fcb">
+            <Label layoutX="781.0" layoutY="156.0" text="FAT" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="fat" alignment="CENTER" editable="false" layoutX="701.0" layoutY="169.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+            <TextField fx:id="fat" alignment="CENTER" editable="false" layoutX="701.0" layoutY="189.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="980.0" layoutY="146.0" text="RATE" textFill="#209fcb">
+            <Label layoutX="980.0" layoutY="156.0" text="RATE" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="rate" alignment="CENTER" editable="false" layoutX="911.0" layoutY="169.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+            <TextField fx:id="rate" alignment="CENTER" editable="false" layoutX="911.0" layoutY="189.0" prefWidth="180.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="857.0" layoutY="226.0" text="AMOUNT" textFill="#209fcb">
+            <Label layoutX="857.0" layoutY="236.0" text="AMOUNT" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="amount" alignment="CENTER" editable="false" layoutX="748.0" layoutY="249.0" prefWidth="318.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
+            <TextField fx:id="amount" alignment="CENTER" editable="false" layoutX="748.0" layoutY="269.0" prefWidth="318.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-radius: 15; -fx-border-width: 2px;">
                <font>
                   <Font size="18.0" />
                </font>
             </TextField>
-            <Button layoutX="735.0" layoutY="318.0" mnemonicParsing="false" onAction="#nextPage" prefWidth="27.0" style="-fx-background-color: #209FCB;" text="&gt;" textFill="WHITE">
+            <Button layoutX="735.0" layoutY="328.0" mnemonicParsing="false" onAction="#nextPage" prefWidth="27.0" style="-fx-background-color: #209FCB;" text="&gt;" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="695.0" layoutY="318.0" mnemonicParsing="false" onAction="#prevPage" style="-fx-background-color: #209FCB;" text="&lt;" textFill="WHITE">
+            <Button layoutX="695.0" layoutY="328.0" mnemonicParsing="false" onAction="#prevPage" style="-fx-background-color: #209FCB;" text="&lt;" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Label fx:id="pagination" layoutX="305.0" layoutY="331.0" text="1 - 10 / 0" textFill="#209fcb">
+            <Label fx:id="pagination" layoutX="305.0" layoutY="340.0" text="1 - 10 / 0" textFill="#209fcb">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="recordLabel" layoutX="983.0" layoutY="4.0" text="ALL" textFill="#209fcb">
+            <Label fx:id="recordLabel" layoutX="983.0" layoutY="14.0" text="ALL" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
