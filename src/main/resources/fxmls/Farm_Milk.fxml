@@ -18,20 +18,12 @@
    <top>
       <AnchorPane prefHeight="55.0" prefWidth="700.0" style="-fx-background-color: #209FCB;" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="50.0" layoutY="9.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="Milk" textFill="#209fcb">
+            <Button layoutX="50.0" layoutY="8.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" text="Milk" textFill="#209fcb">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadFoodUsage" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Usage" textFill="WHITE">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="445.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadMadicine" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text="Madicine" textFill="WHITE">
+            <Button layoutX="246.0" layoutY="8.0" mnemonicParsing="false" onAction="#loadFoodUsage" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Usage" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -39,7 +31,15 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="653.0" layoutY="9.0" mnemonicParsing="false" onAction="#loadFoodPurchase" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Purchase" textFill="WHITE">
+            <Button layoutX="445.0" layoutY="8.0" mnemonicParsing="false" onAction="#loadMadicine" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text="Madicine" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="653.0" layoutY="8.0" mnemonicParsing="false" onAction="#loadFoodPurchase" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: transparent; -fx-border-color: #FFFFFF; -fx-border-radius: 15; -fx-border-width: 2px 2px 2px 2px;" text=" Food Purchase" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -240,7 +240,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Label fx:id="pagination" layoutX="305.0" layoutY="340.0" text="1 - 10 / 0" textFill="#209fcb">
+            <Label fx:id="pagination" layoutX="305.0" layoutY="339.0" text="1 - 10 / 0" textFill="#209fcb">
                <font>
                   <Font size="16.0" />
                </font>
