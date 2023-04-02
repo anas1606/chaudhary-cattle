@@ -67,14 +67,14 @@
                   <Font size="30.0" />
                </font>
             </Label>
-            <Label layoutX="130.0" layoutY="14.0" text="0868 - MILK RECORD" textAlignment="CENTER" textFill="WHITE">
+            <Label layoutX="104.0" layoutY="14.0" text="0868 - MILK RECORD" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <TableView fx:id="foodTable" focusTraversable="false" layoutX="28.0" layoutY="319.0" prefHeight="374.0" prefWidth="331.0" style="-fx-font-size: 16; -fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #209fcb; -fx-border-radius: 3px;">
+      <TableView fx:id="foodTable" focusTraversable="false" layoutX="28.0" layoutY="319.0" prefHeight="373.0" prefWidth="331.0" style="-fx-font-size: 16; -fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #209fcb; -fx-border-radius: 2px;">
         <columns>
           <TableColumn fx:id="foodName" editable="false" prefWidth="75.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 1px;" text="Name" />
           <TableColumn fx:id="foodStock" editable="false" prefWidth="163.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 1PX;" text="Stock" />
@@ -88,7 +88,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="supplierTable" focusTraversable="false" layoutX="388.0" layoutY="319.0" prefHeight="348.0" prefWidth="331.0" style="-fx-font-size: 16; -fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #209fcb; -fx-border-radius: 3px;">
+      <TableView fx:id="supplierTable" focusTraversable="false" layoutX="388.0" layoutY="319.0" prefHeight="348.0" prefWidth="331.0" style="-fx-font-size: 16; -fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: #209fcb; -fx-border-radius: 2px;">
          <columns>
             <TableColumn fx:id="supplierName" editable="false" prefWidth="75.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 1px;" text="Supplier" />
             <TableColumn fx:id="supplierAmount" editable="false" prefWidth="163.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #209FCB; -fx-border-width: 1PX;" text="Amount" />

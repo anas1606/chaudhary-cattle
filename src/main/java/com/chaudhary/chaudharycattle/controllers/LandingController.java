@@ -20,7 +20,7 @@ public class LandingController implements Initializable {
     private Button logout, dashboard, farm, supplier;
 
     public void logOut (){
-        CommanUtils.switchToScene(FxmlPaths.LOGIN, logout, 800, 600);
+        CommanUtils.switchToScene(FxmlPaths.LOGIN, logout, 600, 400);
     }
 
     public void openDashboard(){
