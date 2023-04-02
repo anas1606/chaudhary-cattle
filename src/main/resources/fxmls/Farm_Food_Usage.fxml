@@ -124,7 +124,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Label fx:id="pagination" layoutX="269.0" layoutY="340.0" text="1 - 10 / 10" textFill="#209fc9">
+            <Label fx:id="pagination" layoutX="269.0" layoutY="336.0" text="1 - 10 / 10" textFill="#209fc9">
                <font>
                   <Font size="16.0" />
                </font>
