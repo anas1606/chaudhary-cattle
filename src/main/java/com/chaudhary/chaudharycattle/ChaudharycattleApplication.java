@@ -22,7 +22,7 @@ import java.util.Objects;
 @SpringBootApplication
 public class ChaudharycattleApplication extends Application{
 
-	private  static String TITTLE = "Chaudhary Cattle Farm";
+	private  static final String TITTLE = "Chaudhary Cattle Farm";
 	private static ConfigurableApplicationContext applicationContext;
 	private Parent parent;
 
