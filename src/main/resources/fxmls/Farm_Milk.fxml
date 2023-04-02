@@ -240,7 +240,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Label fx:id="pagination" layoutX="305.0" layoutY="339.0" text="1 - 10 / 0" textFill="#209fcb">
+            <Label fx:id="pagination" layoutX="305.0" layoutY="338.0" text="1 - 10 / 0" textFill="#209fcb">
                <font>
                   <Font size="16.0" />
                </font>
