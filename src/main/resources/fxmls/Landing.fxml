@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chaudhary.chaudharycattle.controllers.LandingController">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chaudhary.chaudharycattle.controllers.LandingController">
    <left>
-      <AnchorPane prefHeight="740.0" prefWidth="260.0" style="-fx-background-color: #209FCB;" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="700.0" prefWidth="260.0" style="-fx-background-color: #209FCB;" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane prefHeight="133.0" prefWidth="262.0" style="-fx-background-color: #FFFFFF;">
                <children>
@@ -47,7 +47,7 @@
                   <Image url="@icons/cow.png" />
                </image>
             </ImageView>
-            <Button fx:id="logout" layoutX="87.0" layoutY="695.0" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: transparent;" text="Log Out" textFill="WHITE">
+            <Button fx:id="logout" layoutX="87.0" layoutY="655.0" mnemonicParsing="false" onAction="#logOut" style="-fx-background-color: transparent;" text="Log Out" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -55,7 +55,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="66.0" layoutY="700.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="66.0" layoutY="660.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/logout.png" />
                </image>
