@@ -11,40 +11,40 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chaudhary.chaudharycattle.controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chaudhary.chaudharycattle.controllers.LoginController">
    <children>
-      <Pane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #209FCB;">
+      <Pane prefHeight="400.0" prefWidth="266.0" style="-fx-background-color: #209FCB;">
          <children>
-            <ImageView fitHeight="400.0" fitWidth="450.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="274.0" fitWidth="272.0" layoutX="-6.0" layoutY="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/milk.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="250.0" fitWidth="300.0" layoutX="61.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="225.0" layoutX="50.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/chaudhary_slog.png" />
                </image>
             </ImageView>
          </children></Pane>
-      <Pane layoutX="400.0" prefHeight="600.0" prefWidth="400.0">
+      <Pane layoutX="272.0" layoutY="2.0" prefHeight="400.0" prefWidth="329.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="108.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="103.0" fitWidth="126.0" layoutX="91.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/chaudhary_logo.png" />
                </image>
             </ImageView>
-            <TextField fx:id="username" layoutX="102.0" layoutY="261.0" promptText="User Name" style="-fx-border-color: #209FCB; -fx-border-width: 0px 0px 3px 0px; -fx-background-color: transparent; -fx-border-radius: 10;">
+            <TextField fx:id="username" layoutX="72.0" layoutY="151.0" promptText="User Name" style="-fx-border-color: #209FCB; -fx-border-width: 0px 0px 3px 0px; -fx-background-color: transparent; -fx-border-radius: 10;">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </TextField>
-            <PasswordField fx:id="password" layoutX="102.0" layoutY="337.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #209FCB; -fx-border-width: 0px 0px 3px 0px; -fx-border-radius: 10;">
+            <PasswordField fx:id="password" layoutX="72.0" layoutY="207.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: #209FCB; -fx-border-width: 0px 0px 3px 0px; -fx-border-radius: 10;">
                <font>
-                  <Font size="16.0" />
+                  <Font size="14.0" />
                </font>
             </PasswordField>
-            <Label layoutX="250.0" layoutY="580.0" text="Powerd By: Quba Infotech" textFill="#209fcb" />
-            <Button fx:id="signin" layoutX="102.0" layoutY="411.0" mnemonicParsing="false" onAction="#signIn" onKeyPressed="#signIn_Key" prefHeight="32.0" prefWidth="195.0" style="-fx-background-color: #209FCB; -fx-background-radius: 20;" text="Sign In" textFill="WHITE">
+            <Label layoutX="179.0" layoutY="378.0" text="Powerd By: Quba Infotech" textFill="#209fcb" />
+            <Button fx:id="signin" layoutX="72.0" layoutY="281.0" mnemonicParsing="false" onAction="#signIn" onKeyPressed="#signIn_Key" prefHeight="32.0" prefWidth="171.0" style="-fx-background-color: #209FCB; -fx-background-radius: 20;" text="Sign In" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -52,12 +52,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="75.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="45.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@icons/userInfo.png" />
+                  <Image url="@icons/user.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="75.0" layoutY="349.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="45.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/lock.png" />
                </image>

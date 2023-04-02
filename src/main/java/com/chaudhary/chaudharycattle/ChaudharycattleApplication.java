@@ -44,7 +44,7 @@ public class ChaudharycattleApplication extends Application{
 		primaryStage.getIcons().add(icon);
 		primaryStage.setResizable(false);
 		primaryStage.centerOnScreen();
-		primaryStage.setScene(new Scene(parent, 800, 600));
+		primaryStage.setScene(new Scene(parent, 600, 400));
 		primaryStage.setTitle(TITTLE);
 		primaryStage.show();
 	}
