@@ -1,7 +1,8 @@
 package com.chaudhary.chaudharycattle.controllers.Farm;
 
 import com.chaudhary.chaudharycattle.entities.farm.Food;
-import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordModel;
+import com.chaudhary.chaudharycattle.model.DashboardTableView;
+import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordTableView;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageTableView;
 import com.chaudhary.chaudharycattle.service.farm.FoodUsageService;
 import com.chaudhary.chaudharycattle.utils.CommanUtils;
@@ -15,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,11 +35,17 @@ public class FoodUsageController implements Initializable {
     @FXML
     private TableView<FoodUsageTableView> table = new TableView<>();
     @FXML
+    private TableView<DashboardTableView> usageTable = new TableView<>();
+    @FXML
     private TableColumn<FoodUsageTableView, String> foodCol,dateCol,qtyCol;
+    @FXML
+    private TableColumn<DashboardTableView, String> foodUsageCol, qtyUsageCol;
     @FXML
     private Label pagination;
     @FXML
     private DatePicker datePicker;
+    @FXML
+    private Button deleteBtn,saveBtn;
     @Autowired
     private FoodUsageService foodUsageService;
     private static List<String> foodList;
@@ -74,6 +82,8 @@ public class FoodUsageController implements Initializable {
                 food.clear();
                 food.requestFocus();
             }else{
+                deleteBtn.setVisible(false);
+                saveBtn.setVisible(true);
                 this.unit.setText(unit);
                 qty.clear();
                 qtyd.clear();
@@ -83,6 +93,28 @@ public class FoodUsageController implements Initializable {
 
         Thread rederTotalData = new Thread(this::renderTotalData);
         rederTotalData.start();
+        renderDataTable();
+        table.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() > 1) {
+                if (table.getSelectionModel().getSelectedItem() != null) {
+                    deleteBtn.setVisible(true);
+                    saveBtn.setVisible(false);
+                }
+            }
+        });
+    }
+    public void delete (){
+        FoodUsageTableView foodUsageTableView = table.getSelectionModel().getSelectedItem();
+        StringBuilder str = new StringBuilder();
+        str.append("Name : ").append(foodUsageTableView.getFood());
+        str.append("\nUnit : ").append(foodUsageTableView.getUnit());
+        str.append("\nQty : ").append(foodUsageTableView.getQty());
+        if( (CommanUtils.confirmationAlert("Deleting Slip ", str.toString())).equalsIgnoreCase("OK") ) {
+            foodUsageService.deleteRecord(foodUsageTableView);
+        }
+        renderDataTable();
+        deleteBtn.setVisible(false);
+        saveBtn.setVisible(true);
     }
     public void submit_key(KeyEvent event) {
         if(event.getCode().equals(KeyCode.ENTER))
@@ -93,12 +125,13 @@ public class FoodUsageController implements Initializable {
         if(validate(qty)) {
             StringBuilder str = new StringBuilder();
             str.append("Name : ").append(food.getText());
-            str.append("\nUnit : ").append("KG");
+            str.append("\nUnit : ").append(unit.getText());
             str.append("\nQty : ").append(qty);
             if((CommanUtils.confirmationAlert("Food Usage Slip ", str.toString())).equalsIgnoreCase("OK") ) {
                 if(foodUsageService.submit(food.getText(), qty, cb.getValue(), datePicker.getValue())) {
                     CommanUtils.informationAlert("Information", "Stock Updated & Data Inserted");
                     renderTotalData();
+                    renderDataTable();
                     food.clear();
                     food.requestFocus();
                     unit.clear();
@@ -135,12 +168,13 @@ public class FoodUsageController implements Initializable {
         }
     }
     private  void renderTotalData (){
-        FoodUsageRecordModel model = foodUsageService.foodUsageRecord();
-        chhar.setText(model.getChhar().toString());
-        gool.setText(model.getGool().toString());
-        tail.setText(model.getTail().toString());
-        bear.setText(model.getBear().toString());
-        renderDataTable();
+        foodUsageCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        qtyUsageCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        //Creating a table view
+        final ObservableList<DashboardTableView> data = FXCollections.observableArrayList(
+                foodUsageService.foodUsageRecord()
+        );
+        usageTable.setItems(data);
     }
     private void renderDataTable (){
         foodCol.setCellValueFactory(new PropertyValueFactory<>("food"));

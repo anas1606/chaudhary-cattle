@@ -2,10 +2,8 @@ package com.chaudhary.chaudharycattle.model.farm;
 
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Data
-public class FoodUsageRecordModel {
+public class FoodUsageRecordTableView {
     private Double chhar;
     private Double tail;
     private Double gool;

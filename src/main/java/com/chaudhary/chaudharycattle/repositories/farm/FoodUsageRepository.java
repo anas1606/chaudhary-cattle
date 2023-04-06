@@ -1,6 +1,7 @@
 package com.chaudhary.chaudharycattle.repositories.farm;
 
 import com.chaudhary.chaudharycattle.entities.farm.FoodUsage;
+import com.chaudhary.chaudharycattle.model.DashboardTableView;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,14 +9,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
-public interface FoodUsageRepository extends JpaRepository<FoodUsage, Integer> {
+public interface FoodUsageRepository extends JpaRepository<FoodUsage, Long> {
 
     Page<FoodUsage> findAllByCreatedDateBetween (LocalDate startDate, LocalDate endDate, Pageable page);
     Integer countOfIdByCreatedDateBetween(LocalDate startDate, LocalDate endDate);
-    @Query(value = "SELECT SUM(qty) FROM FoodUsage WHERE createdDate BETWEEN ?1 AND ?2 AND fk_food_id = ?3",nativeQuery = true)
-    Double sumOfQtyByCreatedDateBetweenAndFk_food_id (LocalDate startDate, LocalDate endDate, int food);
+    @Query("SELECT new com.chaudhary.chaudharycattle.model.DashboardTableView( f.name, ROUND(SUM(fu.qty),2) ) FROM FoodUsage fu INNER JOIN Food f ON f.id = fu.fId WHERE fu.createdDate BETWEEN ?1 AND ?2 GROUP BY fu.fId")
+    List<DashboardTableView> sumOfQtyByCreatedDateBetweenAndFk_food_idAndGroupBy (LocalDate startDate, LocalDate endDate);
+
     @Query(value = "SELECT IFNULL(ROUND(SUM(amount),2),0.0) FROM FoodUsage WHERE createdDate BETWEEN ?1 AND ?2",nativeQuery = true)
     Double sumOfAmountByCreatedDateBetween (LocalDate startDate, LocalDate endDate);
 

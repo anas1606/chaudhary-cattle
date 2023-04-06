@@ -5,7 +5,8 @@ import com.chaudhary.chaudharycattle.entities.farm.FoodPurchase;
 import com.chaudhary.chaudharycattle.entities.farm.Supplier;
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.entities.farm.FoodUsage;
-import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordModel;
+import com.chaudhary.chaudharycattle.model.DashboardTableView;
+import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordTableView;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageTableView;
 import com.chaudhary.chaudharycattle.repositories.farm.FoodPurchaseRepository;
 import com.chaudhary.chaudharycattle.repositories.farm.SupplierRepository;
@@ -72,13 +73,12 @@ public class FoodUsageServiceImpl implements FoodUsageService {
 //                      Update Food Purchased Stock
                         foodPurchase.setRQty(foodPurchase.getRQty() - tQty);
                         foodPurchaseRepository.save(foodPurchase);
-
-                        FoodUsage foodUsage = new FoodUsage(food, date, tQty, Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()*tQty);
+                        FoodUsage foodUsage = new FoodUsage(food, foodPurchase, date, tQty, Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()*tQty);
                         foodUsageRepository.save(foodUsage);
                         break;
                     } else {
 
-                        FoodUsage foodUsage = new FoodUsage(food, date, foodPurchase.getRQty(), Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()* foodPurchase.getRQty());
+                        FoodUsage foodUsage = new FoodUsage(food, foodPurchase ,date, foodPurchase.getRQty(), Shift.valueOf(shift), foodPurchase.getRate(), foodPurchase.getRate()* foodPurchase.getRQty());
                         foodUsageRepository.save(foodUsage);
 
                         tQty = tQty - foodPurchase.getRQty();
@@ -106,16 +106,22 @@ public class FoodUsageServiceImpl implements FoodUsageService {
     }
 
     @Override
-    public FoodUsageRecordModel foodUsageRecord() {
-        FoodUsageRecordModel model = new FoodUsageRecordModel();
-        Double tail = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(startDate, endDate, foodRepository.findByName("TAIL").getId());
-        Double gool = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(startDate, endDate, foodRepository.findByName("GOOL").getId());
-        Double chhar = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(startDate, endDate, foodRepository.findByName("CHHAR").getId());
-        Double bear = foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_id(startDate, endDate, foodRepository.findByName("BEAR").getId());
-        model.setTail(tail != null ? tail : 0.0);
-        model.setGool(gool != null ? gool : 0.0);
-        model.setChhar(chhar != null ? chhar : 0.0);
-        model.setBear(bear != null ? bear : 0.0);
-        return model;
+    public List<DashboardTableView> foodUsageRecord() {
+        return foodUsageRepository.sumOfQtyByCreatedDateBetweenAndFk_food_idAndGroupBy(startDate,endDate);
+    }
+    @Transactional
+    @Override
+    public void deleteRecord(FoodUsageTableView foodUsageTableView) {
+        Food food = foodRepository.findByName(foodUsageTableView.getFood());
+        food.setStock(food.getStock()+foodUsageTableView.getQty());
+        foodRepository.save(food);
+
+        FoodUsage foodUsage = foodUsageRepository.findById(foodUsageTableView.getId()).orElse(null);
+        assert foodUsage != null;
+        FoodPurchase foodPurchase = foodUsage.getFpId();
+        foodPurchase.setRQty(foodPurchase.getRQty()+foodUsageTableView.getQty());
+        foodPurchaseRepository.save(foodPurchase);
+
+        foodUsageRepository.deleteById(foodUsageTableView.getId());
     }
 }
