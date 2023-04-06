@@ -15,6 +15,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,11 +36,13 @@ public class MilkController implements Initializable {
     @FXML
     private ComboBox<String> cb;
     @FXML
-    private TableColumn<MilkTableView, String> shift,date,liters,fats,rates,amounts;
+    private TableColumn<MilkTableView, String> shift,date,liters,fats,rates,amounts,codeCol;
     @FXML
     private DatePicker datePicker;
     @FXML
     private Label pagination,recordLabel;
+    @FXML
+    private Button deleteBtn,saveBtn;
     @Autowired
     private MilkService milkService;
     private static int pageNo = 0;
@@ -123,12 +126,13 @@ public class MilkController implements Initializable {
 
         Thread totalData = new Thread(()->{renderTotalData("0");});
         totalData.start();
-        Thread dataTable = new Thread(this::renderDataTable);
-        dataTable.start();
+        renderDataTable();
         lt.focusedProperty().addListener((ov, oldv, newV) -> {
             if(codes.contains(code.getText())){
                 renderTotalData(code.getText());
                 recordLabel.setText(code.getText());
+                deleteBtn.setVisible(false);
+                saveBtn.setVisible(true);
             }else{
                 recordLabel.setText("ALL");
                 renderTotalData("0");
@@ -136,8 +140,37 @@ public class MilkController implements Initializable {
                 code.requestFocus();
             }
         });
+
+
+        table.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getClickCount() > 1) {
+                if (table.getSelectionModel().getSelectedItem() != null) {
+                    deleteBtn.setVisible(true);
+                    saveBtn.setVisible(false);
+                }
+            }
+        });
     }
 
+    public void delete (){
+        MilkTableView milkTableView = table.getSelectionModel().getSelectedItem();
+        StringBuilder str = new StringBuilder();
+        str.append("Date : ").append(milkTableView.getDate());
+        str.append("\nShift : ").append(milkTableView.getShift());
+        str.append("\nLt : ").append(milkTableView.getLiters());
+        str.append("\nFat : ").append(milkTableView.getFat());
+        str.append("\nRate : ").append(milkTableView.getRate());
+        str.append("\nAmount : ").append(milkTableView.getAmount());
+        if( (CommanUtils.confirmationAlert("Deleting Slip ", str.toString())).equalsIgnoreCase("OK") ) {
+            milkService.deleteRecord(milkTableView.getId());
+        }
+        Thread totalData = new Thread(()->{renderTotalData("0");});
+        totalData.start();
+        renderDataTable();
+        deleteBtn.setVisible(false);
+        saveBtn.setVisible(true);
+        clearAllFields();
+    }
     public void nextPage (){
         if(totalRecord > (pageNo+1)*maxSize) {
             pageNo++;
@@ -172,6 +205,7 @@ public class MilkController implements Initializable {
         fats.setCellValueFactory(new PropertyValueFactory<>("fat"));
         rates.setCellValueFactory(new PropertyValueFactory<>("rate"));
         amounts.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        codeCol.setCellValueFactory(new PropertyValueFactory<>("code"));
         //Creating a table view
         final ObservableList<MilkTableView> data = FXCollections.observableArrayList(
                 milkService.getTableData(pageNo, maxSize)

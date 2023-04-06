@@ -18,6 +18,7 @@ public class MilkTableView {
     private Double fat;
     private Double rate;
     private Double amount;
+    private String code;
 
     public MilkTableView (Milk milk){
         this.id = milk.getId();
@@ -27,5 +28,6 @@ public class MilkTableView {
         this.fat = milk.getFat();
         this.rate = milk.getRate();
         this.amount = milk.getAmount();
+        this.code = milk.getCode();
     }
 }

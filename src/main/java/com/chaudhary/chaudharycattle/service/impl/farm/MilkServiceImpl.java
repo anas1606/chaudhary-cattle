@@ -59,4 +59,9 @@ public class MilkServiceImpl implements MilkService {
         else
             return milkRepository.milkRecord(startDate, endDate, Collections.singletonList(code));
     }
+
+    @Override
+    public void deleteRecord(long id) {
+        milkRepository.deleteById(id);
+    }
 }

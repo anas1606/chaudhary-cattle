@@ -14,4 +14,5 @@ public interface MilkService {
     int getTableDataCount ();
     Double totalLitersOfMilkByShift (Shift shift, String code);
     MilkRecordModel milkRecord (String code);
+    void deleteRecord (long id);
 }
