@@ -26,6 +26,8 @@ public class DashboardServiceImpl implements DashboardService {
     private FoodUsageRepository foodUsageRepository;
     @Autowired
     private MedicalRepository medicalRepository;
+    @Autowired
+    private SupplierRepaymentRepository supplierRepaymentRepository;
     private static final LocalDate startDate = LocalDate.now().withDayOfMonth(1);
     private static final LocalDate endDate = startDate.plusMonths(1).minusDays(1);
     @Override
@@ -58,6 +60,7 @@ public class DashboardServiceImpl implements DashboardService {
     public Double getCashBalance() {
         Double income = milkRepository.sumOfAmount();
         Double medicalCashPayment = medicalRepository.sumOfAmountByPymentMode(PaymentMode.CASH);
-        return income - (medicalCashPayment);
+        Double rePayment = supplierRepaymentRepository.sumAmount();
+        return Double.parseDouble(String.format("%.2f", income - (medicalCashPayment + rePayment) ));
     }
 }

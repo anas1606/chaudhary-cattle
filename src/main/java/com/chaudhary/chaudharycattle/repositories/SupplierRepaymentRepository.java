@@ -21,4 +21,6 @@ public interface SupplierRepaymentRepository extends JpaRepository <SupplierRepa
     @Query(value = "SELECT IFNULL(ROUND(SUM(amount),2),0.0) FROM SupplierRepayment sr WHERE createdDate BETWEEN ?1 AND ?2 AND bId = ?3",nativeQuery = true)
     double sumAmountByCreatedDateBetweenAndBId (LocalDate startDate, LocalDate endDate, Supplier supplier);
     Long countOfIdByCreatedDateBetween(LocalDate startDate, LocalDate endDate);
+    @Query(value = "SELECT IFNULL(ROUND(SUM(amount),2),0.0) FROM SupplierRepayment sr WHERE 1=1",nativeQuery = true)
+    double sumAmount ();
 }
