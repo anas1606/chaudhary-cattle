@@ -10,7 +10,7 @@ spring:
 #    Local config
     url: jdbc:mysql://localhost:3306/chaudharycattle
     username: root
-    password: rootroot
+    password: root
     driverClassName: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: false
