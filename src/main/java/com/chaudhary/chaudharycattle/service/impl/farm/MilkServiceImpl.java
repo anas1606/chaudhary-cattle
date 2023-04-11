@@ -4,7 +4,7 @@ import com.chaudhary.chaudharycattle.entities.enums.Shift;
 import com.chaudhary.chaudharycattle.entities.farm.Milk;
 import com.chaudhary.chaudharycattle.model.farm.MilkRecordModel;
 import com.chaudhary.chaudharycattle.model.farm.MilkTableView;
-import com.chaudhary.chaudharycattle.repositories.farm.MilkRepository;
+import com.chaudhary.chaudharycattle.repositories.MilkRepository;
 import com.chaudhary.chaudharycattle.service.farm.MilkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

@@ -1,4 +1,4 @@
-package com.chaudhary.chaudharycattle.repositories.farm;
+package com.chaudhary.chaudharycattle.repositories;
 
 import com.chaudhary.chaudharycattle.entities.enums.PaymentMode;
 import com.chaudhary.chaudharycattle.entities.farm.Medical;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface MedicalRepository extends JpaRepository<Medical, Integer> {
+public interface MedicalRepository extends JpaRepository<Medical, Long> {
     @Query(value = "SELECT IFNULL(ROUND(SUM(amount),2),0.0) FROM Medical WHERE createdDate BETWEEN ?1 AND ?2",nativeQuery = true)
     Double sumOfAmountByCreatedDateBetween (LocalDate startDate, LocalDate endDate);
     Page<Medical> findAllByCreatedDateBetween(LocalDate startDate, LocalDate endDate, Pageable page);

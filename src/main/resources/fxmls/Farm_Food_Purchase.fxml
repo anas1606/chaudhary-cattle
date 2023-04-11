@@ -137,6 +137,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <TextField fx:id="foodAdd" alignment="CENTER" layoutX="243.0" layoutY="8.0" promptText="FOOD NAME" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" visible="false">
                      <font>
@@ -159,6 +162,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <TextField fx:id="buyerAdd" alignment="CENTER" layoutX="243.0" layoutY="58.0" promptText="SUPPLIER NAME" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" visible="false">
                      <font>
@@ -181,6 +187,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Label layoutX="47.0" layoutY="192.0" text="Supplier" textFill="WHITE">
                      <font>

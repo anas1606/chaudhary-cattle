@@ -49,7 +49,7 @@ public class FoodPurchaseController implements Initializable {
     private static final int maxSize = 10;
     private static int from = 1;
     private static int to = maxSize;
-    private static int totalRecord = 0;
+    private static long totalRecord = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -126,7 +126,7 @@ public class FoodPurchaseController implements Initializable {
         CommanUtils.loadPage(FxmlPaths.FARM_MADICINE);
     }
     public void nextPage (){
-        if(totalRecord > (pageNo+1)*maxSize) {
+        if(totalRecord > (long) (pageNo + 1) *maxSize) {
             pageNo++;
             from = to + 1;
             to = to + maxSize;

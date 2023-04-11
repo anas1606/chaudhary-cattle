@@ -97,6 +97,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Button fx:id="addSupplier" layoutX="77.0" layoutY="20.0" mnemonicParsing="false" onAction="#addNewSupplierPrompt" prefWidth="192.0" style="-fx-background-color: #209FCB; -fx-background-radius: 15; -fx-border-color: #FFFFFF; -fx-border-radius: 15;" text="Add New Supplier" textFill="WHITE">
                      <font>
@@ -124,6 +127,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Label layoutX="81.0" layoutY="231.0" text="Payment" textFill="WHITE">
                      <font>

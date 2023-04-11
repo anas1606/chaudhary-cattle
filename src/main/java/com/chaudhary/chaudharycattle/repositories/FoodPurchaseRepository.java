@@ -1,4 +1,4 @@
-package com.chaudhary.chaudharycattle.repositories.farm;
+package com.chaudhary.chaudharycattle.repositories;
 
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.entities.farm.FoodPurchase;
@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface FoodPurchaseRepository extends JpaRepository<FoodPurchase, Integer> {
+public interface FoodPurchaseRepository extends JpaRepository<FoodPurchase, Long> {
     Page<FoodPurchase> findAllByCreatedDateBetween (LocalDate startDate, LocalDate endDate, Pageable page);
     @Query(value = "SELECT * FROM FoodPurchase WHERE fid = ?1 AND rQty > 0 ORDER BY createdDate ASC",nativeQuery = true)
     List<FoodPurchase> findAllByFid (Food food);

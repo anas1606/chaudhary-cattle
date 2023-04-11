@@ -5,10 +5,10 @@ import com.chaudhary.chaudharycattle.entities.farm.SupplierLedger;
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.entities.farm.FoodPurchase;
 import com.chaudhary.chaudharycattle.model.farm.FoodPurchaseTableView;
-import com.chaudhary.chaudharycattle.repositories.farm.SupplierLedgerRepository;
-import com.chaudhary.chaudharycattle.repositories.farm.SupplierRepository;
-import com.chaudhary.chaudharycattle.repositories.farm.FoodPurchaseRepository;
-import com.chaudhary.chaudharycattle.repositories.farm.FoodRepository;
+import com.chaudhary.chaudharycattle.repositories.SupplierLedgerRepository;
+import com.chaudhary.chaudharycattle.repositories.SupplierRepository;
+import com.chaudhary.chaudharycattle.repositories.FoodPurchaseRepository;
+import com.chaudhary.chaudharycattle.repositories.FoodRepository;
 import com.chaudhary.chaudharycattle.service.farm.FoodPurchasedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -75,8 +75,8 @@ public class FoodPurchasedServiceImpl implements FoodPurchasedService {
         return foodPurchases.stream().map(FoodPurchaseTableView::new).collect(Collectors.toList());
     }
     @Override
-    public int getTableDataCount() {
-        Integer count =  supplierLedgerRepository.countOfIdByCreatedDateBetween(startDate, endDate);
+    public long getTableDataCount() {
+        Long count =  supplierLedgerRepository.countOfIdByCreatedDateBetween(startDate, endDate);
         return count != null ? count : 0;
     }
 }

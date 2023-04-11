@@ -3,7 +3,7 @@ package com.chaudhary.chaudharycattle.service.impl;
 import com.chaudhary.chaudharycattle.entities.enums.PaymentMode;
 import com.chaudhary.chaudharycattle.entities.enums.Shift;
 import com.chaudhary.chaudharycattle.model.DashboardTableView;
-import com.chaudhary.chaudharycattle.repositories.farm.*;
+import com.chaudhary.chaudharycattle.repositories.*;
 import com.chaudhary.chaudharycattle.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

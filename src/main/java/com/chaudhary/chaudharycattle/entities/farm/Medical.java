@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Medical {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int mId;
+    private Long mId;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "bId")
     private Supplier bId;

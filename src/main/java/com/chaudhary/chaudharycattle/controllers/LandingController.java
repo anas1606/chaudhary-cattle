@@ -30,6 +30,7 @@ public class LandingController implements Initializable {
         CommanUtils.loadPage(FxmlPaths.FARM_MILK);
     }
     public void openSupplier(){
+        CommanUtils.loadPage(FxmlPaths.SUPLLIER_PURCHASE_RECORD);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

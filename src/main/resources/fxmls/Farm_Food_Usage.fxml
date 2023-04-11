@@ -102,6 +102,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Label layoutX="168.0" layoutY="205.0" text="." textFill="WHITE">
                      <font>

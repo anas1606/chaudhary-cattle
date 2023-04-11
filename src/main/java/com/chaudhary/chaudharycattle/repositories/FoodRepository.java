@@ -1,4 +1,4 @@
-package com.chaudhary.chaudharycattle.repositories.farm;
+package com.chaudhary.chaudharycattle.repositories;
 
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import org.springframework.data.jpa.repository.JpaRepository;

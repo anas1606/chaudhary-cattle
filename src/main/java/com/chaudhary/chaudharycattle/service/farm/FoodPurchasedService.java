@@ -9,5 +9,5 @@ public interface FoodPurchasedService {
     boolean addNewBuyer (String name, String contact);
     boolean submit (String food, String buyer, Double rate, Double qty, Double amount, LocalDate date);
     List<FoodPurchaseTableView> getTableData (int pageNo, int maxSize);
-    int getTableDataCount ();
+    long getTableDataCount ();
 }

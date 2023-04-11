@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class FoodPurchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int fpId;
+    private Long fpId;
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fId")
     private Food fId;
