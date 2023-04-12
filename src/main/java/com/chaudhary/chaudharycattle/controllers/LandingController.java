@@ -32,6 +32,9 @@ public class LandingController implements Initializable {
     public void openSupplier(){
         CommanUtils.loadPage(FxmlPaths.SUPLLIER_PURCHASE_RECORD);
     }
+    public void openReport(){
+        CommanUtils.loadPage(FxmlPaths.MILK_REPORT);
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         CommanUtils.setLandingBorderPane(bp);

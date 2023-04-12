@@ -73,6 +73,19 @@
                   <Image url="@icons/supplier.png" />
                </image>
             </ImageView>
+            <Button fx:id="report" layoutX="53.0" layoutY="376.0" mnemonicParsing="false" onAction="#openReport" style="-fx-background-color: transparent;" text="Reports" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="21.0" layoutY="381.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icons/dashboard.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </left>
