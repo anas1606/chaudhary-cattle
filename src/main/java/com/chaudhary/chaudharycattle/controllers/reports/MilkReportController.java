@@ -52,8 +52,8 @@ public class MilkReportController implements Initializable {
     public void loadRepayment() {
         CommanUtils.loadPage(FxmlPaths.SUPLLIER_REPAYMENT);
     }
-    public void loadRepaymentStatement () {
-        CommanUtils.loadPage(FxmlPaths.SUPLLIER_REPAYMENT_STATEMENT);
+    public void loadUsageReport () {
+        CommanUtils.loadPage(FxmlPaths.USAGE_REPORT);
     }
     public void filter_key(KeyEvent event) {
         if(event.getCode().equals(KeyCode.ENTER))

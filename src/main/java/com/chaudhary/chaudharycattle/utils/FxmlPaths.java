@@ -13,4 +13,5 @@ public class FxmlPaths {
     public static String SUPLLIER_REPAYMENT_STATEMENT = FXMLS+"Supllier_Repayment_Statement.fxml";
     public static String SUPLLIER_REPAYMENT = FXMLS+"Supllier_Repayment.fxml";
     public static String MILK_REPORT = FXMLS+"Milk_Report.fxml";
+    public static String USAGE_REPORT = FXMLS+"Usage_Report.fxml";
 }

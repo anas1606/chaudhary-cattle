@@ -2,7 +2,6 @@ package com.chaudhary.chaudharycattle.controllers.Farm;
 
 import com.chaudhary.chaudharycattle.entities.farm.Food;
 import com.chaudhary.chaudharycattle.model.DashboardTableView;
-import com.chaudhary.chaudharycattle.model.farm.FoodUsageRecordTableView;
 import com.chaudhary.chaudharycattle.model.farm.FoodUsageTableView;
 import com.chaudhary.chaudharycattle.service.farm.FoodUsageService;
 import com.chaudhary.chaudharycattle.utils.CommanUtils;
@@ -29,7 +28,7 @@ import java.util.stream.Collectors;
 public class FoodUsageController implements Initializable {
 
     @FXML
-    private TextField food,qty,unit,qtyd,chhar,gool,tail,bear;
+    private TextField food,qty,unit,qtyd;
     @FXML
     private ComboBox<String> cb;
     @FXML
@@ -37,7 +36,7 @@ public class FoodUsageController implements Initializable {
     @FXML
     private TableView<DashboardTableView> usageTable = new TableView<>();
     @FXML
-    private TableColumn<FoodUsageTableView, String> foodCol,dateCol,qtyCol;
+    private TableColumn<FoodUsageTableView, String> foodCol,dateCol,qtyCol,shiftCol;
     @FXML
     private TableColumn<DashboardTableView, String> foodUsageCol, qtyUsageCol;
     @FXML
@@ -127,6 +126,7 @@ public class FoodUsageController implements Initializable {
             str.append("Name : ").append(food.getText());
             str.append("\nUnit : ").append(unit.getText());
             str.append("\nQty : ").append(qty);
+            str.append("\nShift : ").append(cb.getValue());
             if((CommanUtils.confirmationAlert("Food Usage Slip ", str.toString())).equalsIgnoreCase("OK") ) {
                 if(foodUsageService.submit(food.getText(), qty, cb.getValue(), datePicker.getValue())) {
                     CommanUtils.informationAlert("Information", "Stock Updated & Data Inserted");
@@ -180,6 +180,7 @@ public class FoodUsageController implements Initializable {
         foodCol.setCellValueFactory(new PropertyValueFactory<>("food"));
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        shiftCol.setCellValueFactory(new PropertyValueFactory<>("shift"));
         //Creating a table view
         final ObservableList<FoodUsageTableView> data = FXCollections.observableArrayList(
                 foodUsageService.getDataTable(pageNo, maxSize)

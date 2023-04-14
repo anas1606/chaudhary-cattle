@@ -46,7 +46,7 @@ public class MilkReportServiceImpl implements MilkReportService {
     @Override
     public MilkRecordModel fatRateAndAmountOfReport(LocalDate startDate, LocalDate endDate, String code, String shiftName) {
         List<String> codeList = (code.equalsIgnoreCase("")) ? Arrays.asList("0599","0868") : Collections.singletonList(code);
-        List<Shift> shiftList = (shiftName == null) ? Arrays.asList(Shift.EVENING, Shift.EVENING) : Collections.singletonList(Shift.valueOf(shiftName));
+        List<Shift> shiftList = (shiftName == null) ? Arrays.asList(Shift.EVENING, Shift.MORNING) : Collections.singletonList(Shift.valueOf(shiftName));
         return milkRepository.fatRateAmountOfmilkRecord(startDate,endDate,shiftList,codeList);
     }
 }
