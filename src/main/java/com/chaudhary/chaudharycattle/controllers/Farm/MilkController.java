@@ -73,6 +73,7 @@ public class MilkController implements Initializable {
                 milkService.saveData(cb.getValue(), datePicker.getValue(), _lt, _fat, _rate, _amount, code.getText());
                 CommanUtils.informationAlert("Information", "Dairy Slip Saved.");
                 renderTotalData(code.getText());
+                renderDataTable();
                 clearAllFields();
             }
         }else {

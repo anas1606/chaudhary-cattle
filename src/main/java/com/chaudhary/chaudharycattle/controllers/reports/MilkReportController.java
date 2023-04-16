@@ -6,6 +6,7 @@ import com.chaudhary.chaudharycattle.model.farm.MilkTableView;
 import com.chaudhary.chaudharycattle.service.reports.MilkReportService;
 import com.chaudhary.chaudharycattle.utils.CommanUtils;
 import com.chaudhary.chaudharycattle.utils.FxmlPaths;
+import com.opencsv.CSVWriter;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ import org.controlsfx.control.textfield.TextFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.io.FileWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,6 +43,8 @@ public class MilkReportController implements Initializable {
     private Label pagination;
     @FXML
     private TextField code, morning, evening, fat, rate, amount;
+    @FXML
+    private Button export;
     @Autowired
     private MilkReportService milkReportService;
     private static int pageNo = 0;
@@ -48,6 +52,7 @@ public class MilkReportController implements Initializable {
     private static int from = 1;
     private static int to = maxSize;
     private static long totalRecord = 0;
+    private static final String PATH = "Reports/Milk Report/";
     private static final List<String> codes = new ArrayList<>(Arrays.asList("0599","0868"));
     public void loadRepayment() {
         CommanUtils.loadPage(FxmlPaths.SUPLLIER_REPAYMENT);
@@ -60,6 +65,7 @@ public class MilkReportController implements Initializable {
             filter();
     }
     public void filter () {
+        export.setVisible(false);
         getFilteredMilkReport();
     }
     @Override
@@ -83,6 +89,8 @@ public class MilkReportController implements Initializable {
         final ObservableList<MilkTableView> data = FXCollections.observableArrayList(
                 milkReportService.getFilterMilkReport(fromDate.getValue(), toDate.getValue(), code.getText(), cb.getValue() ,pageNo, maxSize)
         );
+        if(data.size()>0)
+            export.setVisible(true);
         totalRecord = milkReportService.getTableDataCount(fromDate.getValue(),toDate.getValue(),code.getText(), cb.getValue());
         table.setItems(data);
         pagination.setText(""+(from)+" - "+(Math.min(to,totalRecord))+" / "+totalRecord);
@@ -119,5 +127,29 @@ public class MilkReportController implements Initializable {
             to = to - maxSize;
             getFilteredMilkReport();
         }
+    }
+
+    public void exportCSV () throws Exception{
+        String file_name = "MilkReport_FROM_"+fromDate.getValue()+"_TO_"+toDate.getValue()+".csv";
+        CSVWriter writer = new CSVWriter(new FileWriter(PATH+file_name));
+        List<MilkTableView> list = milkReportService.getFilterMilkReport(fromDate.getValue(), toDate.getValue(), code.getText(), cb.getValue() ,pageNo, Integer.MAX_VALUE);
+        writer.writeNext(new String[]{"", ""});
+//        Insert The Record
+        writer.writeNext(new String[]{"Total Liters", String.valueOf((Double.parseDouble(morning.getText()) + Double.parseDouble(evening.getText()) ))});
+        writer.writeNext(new String[]{"Morning", morning.getText()});
+        writer.writeNext(new String[]{"Evening", evening.getText()});
+        writer.writeNext(new String[]{"Fat", fat.getText()});
+        writer.writeNext(new String[]{"Rate", rate.getText()});
+        writer.writeNext(new String[]{"Amount", amount.getText()});
+        writer.writeNext(new String[]{"", ""});
+        String[] headers = {"Code","Shift","Liters","Fat","Rate","Amount","Date"};
+        writer.writeNext(headers);
+        for (MilkTableView obj : list){
+            String[] line = {obj.getCode(), obj.getShift(), obj.getLiters().toString(), obj.getFat().toString(), obj.getRate().toString(), obj.getAmount().toString(), obj.getDate().toString()};
+            writer.writeNext(line);
+        }
+        writer.flush();
+
+        CommanUtils.informationAlert("Information","Milk Report is Exported to CSV.\nPath: /Reports/Milk Report/");
     }
 }

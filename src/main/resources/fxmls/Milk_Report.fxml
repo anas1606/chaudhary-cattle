@@ -93,6 +93,21 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Button fx:id="export" layoutX="997.0" layoutY="68.0" mnemonicParsing="false" onAction="#exportCSV" onKeyPressed="#filter_key" prefHeight="54.0" prefWidth="73.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15;" textFill="#209fcb" visible="false">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/csv.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
             <Label layoutX="899.0" layoutY="254.0" text="AMOUNT" textFill="#209fcb">
