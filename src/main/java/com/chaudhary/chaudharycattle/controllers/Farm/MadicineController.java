@@ -109,6 +109,8 @@ public class MadicineController implements Initializable {
         if(validate(_amount,description.getText(),payment.getValue())){
             if(medicalService.submit(description.getText(),supplier.getText(),_amount,datePicker.getValue(),payment.getValue())){
                 CommanUtils.informationAlert("Information", "Medical Recorded Inserted");
+                renderDataTable();
+                renderRecDataTable();
             }else {
                 CommanUtils.warningAlert("Warning", "Check The Filed Something Wrong");
             }
